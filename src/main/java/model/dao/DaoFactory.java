@@ -8,7 +8,10 @@ import java.util.Properties;
  * Created by Dyvak on 17.12.2016.
  */
 public abstract class DaoFactory {
-    public abstract BusDao createBusDao();
+    public abstract TransportDao createTransportDao();
+    public abstract DriverDao createDriverDao();
+    public abstract UserDao createUserDao();
+
 
     public static final String DB_FILE = "/db.properties";
     private static final String DB_FACTORY_CLASS = "factory.class";

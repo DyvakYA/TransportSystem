@@ -1,7 +1,9 @@
 package model.dao.jdbc;
 
-import model.dao.BusDao;
+import model.dao.DriverDao;
+import model.dao.TransportDao;
 import model.dao.DaoFactory;
+import model.dao.UserDao;
 
 import java.io.InputStream;
 import java.sql.Connection;
@@ -33,7 +35,17 @@ public class JdbcDaoFactory extends DaoFactory {
     }
 
     @Override
-    public BusDao createBusDao() {
-        return new JdbcBusDao(connection);
+    public TransportDao createTransportDao() {
+        return new JdbcTransportDao(connection);
+    }
+
+    @Override
+    public DriverDao createDriverDao() {
+        return new JdbcDriverDao(connection);
+    }
+
+    @Override
+    public UserDao createUserDao() {
+        return new JdbcUserDao(connection);
     }
 }

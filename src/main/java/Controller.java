@@ -26,7 +26,7 @@ public class Controller {
 
     // The Work method
     public void processUser(){
-        model.run();
+        model.userProcces();
 
         //Scanner sc = new Scanner(System.in);
 
