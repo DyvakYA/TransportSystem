@@ -2,7 +2,9 @@ package model.commands.user;
 
 import model.commands.Command;
 import model.dao.DaoFactory;
+import model.dao.UserDao;
 import model.entities.users.User;
+import model.extras.Localization;
 import org.apache.log4j.Logger;
 
 import javax.servlet.ServletException;
@@ -11,21 +13,14 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-/**
- *
- * @author KIRIL
- */
+import static model.servlets.TransportServlet.LOGGER_NAME;
+
 public class FindAllUsersCommand implements Command {
 
     private static final String SERVLET_EXCEPTION = "ForwardRequestServletException";
     private static final String DESTINATION_PAGE = "./index.jsp";
     private static final String USER_LIST = "userList";
 
-    /**
-     *
-     * @param request
-     * @param response
-     */
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) {
 
@@ -38,8 +33,7 @@ public class FindAllUsersCommand implements Command {
             request.getRequestDispatcher(DESTINATION_PAGE).forward(request, response);
         } catch (ServletException | IOException e) {
             Logger logger = (Logger) request.getServletContext().getAttribute(LOGGER_NAME);
-            logger.error(LocalizationHelper.getInstanse().getLocalizedErrorMsg(SERVLET_EXCEPTION), e);
+            logger.error(Localization.getInstanse().getLocalizedErrorMsg(SERVLET_EXCEPTION), e);
         }
     }
-
 }

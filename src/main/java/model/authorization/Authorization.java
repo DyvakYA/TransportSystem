@@ -5,9 +5,9 @@ package model.authorization;
  */
 public class Authorization {
 
-        Role role;
+    Role role;
 
-        public void setRole(Role r){
-            role = r;
-        }
+    public void setRole(Role userRole){
+        role = userRole;
+    }
 }

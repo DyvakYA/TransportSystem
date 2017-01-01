@@ -25,6 +25,8 @@ public class Model {
         Authorization authorization = new Authorization();
         authorization.setRole(admin);
         admin.access();
+
+
         //System.out.println( "Hello World!"   );
 //        BusService service = new BusService();
 //

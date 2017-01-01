@@ -6,8 +6,7 @@
 package model.commands.user;
 
 import org.apache.log4j.Logger;
-import ua.kpi.epam.transport.commands.Command;
-import ua.kpi.epam.transport.extras.LocalizationHelper;
+import model.commands.Command;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -16,7 +15,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Locale;
 
-import static ua.kpi.epam.transport.servlets.TransportServlet.LOGGER_NAME;
+import static model.servlets.TransportServlet.LOGGER_NAME;
 
 /**
  *
@@ -60,7 +59,7 @@ public class ChangeLocaleCommand implements Command {
             request.getRequestDispatcher(DESTINATION_PAGE).forward(request, response);
         } catch (ServletException | IOException ex) {
             Logger logger = (Logger) request.getServletContext().getAttribute(LOGGER_NAME);
-            logger.error(LocalizationHelper.getInstanse().getLocalizedErrorMsg(SERVLET_EXCEPTION), ex);
+            logger.error(model.extras.Localization.getInstanse().getLocalizedErrorMsg(SERVLET_EXCEPTION), ex);
         }
     }
 
