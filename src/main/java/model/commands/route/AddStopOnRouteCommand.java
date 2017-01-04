@@ -1,13 +1,13 @@
 package ua.kpi.epam.transport.commands.route;
 
 import org.apache.log4j.Logger;
-import ua.kpi.epam.transport.commands.validators.route.AddStopOnRouteCommandValidator;
-import ua.kpi.epam.transport.dao.DaoFactory;
-import ua.kpi.epam.transport.dao.RouteStopDao;
-import ua.kpi.epam.transport.dao.jdbc.JdbcDaoFactory;
-import ua.kpi.epam.transport.entities.Route;
-import ua.kpi.epam.transport.entities.RouteStop;
-import ua.kpi.epam.transport.extras.LocalizationHelper;
+import model.commands.validators.route.AddStopOnRouteCommandValidator;
+import model.dao.DaoFactory;
+import model.dao.RouteStopDao;
+import model.dao.jdbc.JdbcDaoFactory;
+import model.entities.Route;
+import model.entities.RouteStop;
+import model.extras.Localization;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -17,10 +17,6 @@ import java.util.List;
 
 import static ua.kpi.epam.transport.servlets.TransportServlet.LOGGER_NAME;
 
-/**
- *
- * @author KIRIL
- */
 public class AddStopOnRouteCommand implements RouteCommand {
 
     private static final String SERVLET_EXCEPTION = "ForwardRequestServletException";

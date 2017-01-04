@@ -1,6 +1,6 @@
 package model.dao;
 
-import model.entities.drivers.Driver;
+import model.entities.Driver;
 
 import java.util.List;
 

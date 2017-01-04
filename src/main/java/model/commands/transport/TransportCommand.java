@@ -1,11 +1,7 @@
-package ua.kpi.epam.transport.commands.transport;
+package model.commands.transport;
 
-import ua.kpi.epam.transport.commands.Command;
+import model.commands.Command;
 
-/**
- *
- * @author KIRIL
- */
 public interface TransportCommand extends Command {
 
     /**
@@ -32,7 +28,6 @@ public interface TransportCommand extends Command {
      *
      */
     String RESULT_ATTRIBUTE = "result";
-
     /**
      *
      */
@@ -51,7 +46,7 @@ public interface TransportCommand extends Command {
     /**
      *
      */
-    String DESTINATION_PAGE = "./admin/transport.jsp";
+    String DESTINATION_PAGE = "transport.jsp";
 
     /**
      *

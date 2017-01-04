@@ -1,22 +1,18 @@
-package ua.kpi.epam.transport.commands.transport;
+package model.commands.transport;
 
+import model.commands.validators.transport.DeleteTransportCommandValidator;
+import model.dao.DaoFactory;
+import model.dao.TransportDao;
+import model.extras.Localization;
 import org.apache.log4j.Logger;
-import ua.kpi.epam.transport.commands.validators.transport.DeleteTransportCommandValidator;
-import ua.kpi.epam.transport.dao.DaoFactory;
-import ua.kpi.epam.transport.dao.TransportDao;
-import ua.kpi.epam.transport.extras.LocalizationHelper;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-import static ua.kpi.epam.transport.servlets.TransportServlet.LOGGER_NAME;
+import static model.servlet.TransportServlet.LOGGER_NAME;
 
-/**
- *
- * @author KIRIL
- */
 public class DeleteTransportCommand implements TransportCommand {
 
     private static final String SERVLET_EXCEPTION = "ForwardRequestServletException";
@@ -38,14 +34,14 @@ public class DeleteTransportCommand implements TransportCommand {
 
         transportDao.delete(Integer.valueOf(request.getParameter(ID_ATTRIBUTE)));
 
-        request.setAttribute(RESULT_ATTRIBUTE, LocalizationHelper.getInstanse()
+        request.setAttribute(RESULT_ATTRIBUTE, Localization.getInstanse()
                 .getLocalizedMessage(request, DELETE_TRANSPORT_SUCCESSFULL_MSG));
         try {
             request.getRequestDispatcher(DESTINATION_ADMIN_PAGE).forward(request,
                     response);
         } catch (ServletException | IOException e) {
             Logger logger = (Logger) request.getServletContext().getAttribute(LOGGER_NAME);
-            logger.error(LocalizationHelper.getInstanse().getLocalizedErrorMsg(SERVLET_EXCEPTION), e);
+            logger.error(Localization.getInstanse().getLocalizedErrorMsg(SERVLET_EXCEPTION), e);
         }
 
     }

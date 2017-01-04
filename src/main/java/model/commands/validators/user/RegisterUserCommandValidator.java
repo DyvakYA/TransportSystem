@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 import static model.commands.user.RegisterUserCommand.*;
-import static model.servlets.TransportServlet.LOGGER_NAME;
+import static model.servlet.TransportServlet.LOGGER_NAME;
 
 public class RegisterUserCommandValidator implements CommandValidator {
 

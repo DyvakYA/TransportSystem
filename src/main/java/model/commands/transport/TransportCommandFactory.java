@@ -1,9 +1,5 @@
-package ua.kpi.epam.transport.commands.transport;
+package model.commands.transport;
 
-/**
- *
- * @author KIRIL
- */
 public class TransportCommandFactory {
 
     /**
@@ -74,9 +70,6 @@ public class TransportCommandFactory {
 		}
 		case UPDATE_TRANSPORT_COMMAND: {
 			return new UpdateTransportCommand();
-		}
-		case FIND_TRANSPORT_FOR_ROUTE_SCHEDULES: {
-			return new FindTransportForRouteSchedules();
 		}
 		default:
 			return null;

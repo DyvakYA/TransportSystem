@@ -4,7 +4,7 @@ import model.commands.Command;
 import model.commands.validators.user.RegisterUserCommandValidator;
 import model.dao.DaoFactory;
 import model.dao.UserDao;
-import model.entities.users.User;
+import model.entities.User;
 import model.extras.Localization;
 import model.entities.enums.UserRoles;
 import org.apache.log4j.Logger;
@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-import static model.servlets.TransportServlet.LOGGER_NAME;
+import static model.servlet.TransportServlet.LOGGER_NAME;
 
 
 public class RegisterUserCommand implements Command {

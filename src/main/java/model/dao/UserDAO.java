@@ -1,7 +1,6 @@
 package model.dao;
 
-
-import model.entities.users.User;
+import model.entities.User;
 
 import java.util.List;
 
@@ -14,5 +13,5 @@ public interface UserDao extends GenericDao<User>{
 
     User findByLogin(String login);
 
-    User autentify(String login, int passwordHash);
+    User authentication(String login, int passwordHash);
 }

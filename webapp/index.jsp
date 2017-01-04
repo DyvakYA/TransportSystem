@@ -1,72 +1,141 @@
-<%@ page import="model.commands.CommandFactory" %>
-<%@ page import="model.commands.user.AutentificateUserCommand" %>
-<%--
-  Created by IntelliJ IDEA.
-  User: Dyvak
-  Date: 20.12.2016
-  Time: 21:58
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html; charset=UTF-8" language="java" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+         pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@page
+        import="model.commands.transport.TransportCommandFactory"%>
+<%--<%@page--%>
+        <%--import="model.commands.route.RouteCommandFactory"%>--%>
+<%--<%@page--%>
+        <%--import="model.commands.plan_of_stopsheduleOfStopCommandFactory"%>--%>
+<%@ page errorPage="error.jsp"%>
 
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=windows-1256">
-  <title>Login Page</title>
-  <link href="css/style.css" rel="stylesheet">
-
-  <c:set var="AUTENTIFICATION_COMMAND"
-         value="<%=CommandFactory.AUTENTIFICATION_COMMAND%>" />
-  <c:set var="LOGIN_ATTRIBUTE"
-         value="<%=AutentificateUserCommand.LOGIN_ATTRIBUTE%>" />
-  <c:set var="PASSWORD_ATTRIBUTE"
-         value="<%=AutentificateUserCommand.PASSWORD_ATTRIBUTE%>" />
-  <c:set var="CHANGE_LOCALE_COMMAND"
-         value="<%=CommandFactory.CHANGE_LOCALE_COMMAND%>" />
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>Transport system</title>
+  <link rel="stylesheet" href="./style.css">
+  <c:set var="FIND_TRANSPORT_FOR_ROUTE_SCHEDULES"
+         value="<%=TransportCommandFactory.FIND_TRANSPORT_FOR_ROUTE_SCHEDULES%>" />
+  <c:set var="FIND_ALL_TRANSPORT_COMMAND"
+         value="<%=TransportCommandFactory.FIND_ALL_TRANSPORT_COMMAND%>" />
+  <%--<c:set var="FIND_ROUTES_BY_STOPS_COMMAND"--%>
+         <%--value="<%=RouteCommandFactory.FIND_ROUTES_BY_STOPS_COMMAND%>" />--%>
+  <%--<c:set var="FIND_SCHEDULE_OF_STOPS_FOR_ROUTE_COMMAND"--%>
+         <%--value="<%=ScheduleOfStopCommandFactory.FIND_SCHEDULE_OF_STOPS_FOR_ROUTE_COMMAND%>" />--%>
 
 </head>
-
 <body>
-
-<c:if test="${sessionScope.userLocale != null}">
-  <fmt:setLocale value="${sessionScope.userLocale}" scope="session" />
-</c:if>
 <fmt:bundle basename="labels">
-  <div style="display: block; margin: 20px;">
-  <a class="my_link" href="./index.jsp"><fmt:message
-        key="RouteSeach" /></a> <a class="my_link"
-  href="./TransportServlet?command=${FIND_ALL_ROUTE_AND_STOPS_COMMAND}"><fmt:message
-        key="RouteSchemes" /></a> <a class="my_link"
-  href="./autentification.jsp"><fmt:message key="EnterSystem" /></a> <a
-  class="my_link" href="./admin/transport.jsp"><fmt:message
-        key="AdminPage" /></a> <a class="my_link"
-  href="./TransportServlet?command=${CHANGE_LOCALE_COMMAND}"><fmt:message
-        key="ChangeLocale" /></a>
+  <div class="main">
+    <div style="display: block;">
+      <div style="display: block; margin: 20px;">
+        </a> <a class="my_link" href="./TransportServlet?command=${FIND_ALL_TRANSPORT_COMMAND}">
+        <fmt:message key="RouteSchemes" />
+      </a>
+        <a class="my_link" href="./autentification.jsp">
+          <fmt:message key="EnterSystem" />
+        </a>
+      </div>
+      <form method="get" name="registration" action="./TransportServlet">
+        <%--<div style="display: inline; float: left; margin: 20px;">--%>
 
-<form accept-charset="UTF-8" action="./TransportServlet">
-  <div ><input name="utf8" type="hidden" value="✓">
-  <div class="auth-form-header">
-    <h3>Sign in to Transport System</h3>
-  </div>
-  <div id="js-flash-container">
-  </div>
-    <div class="auth-form-body">
-      <label for="login_field">
-        Username or email address
-      </label>
-      <input class="form-control input-block" id="login_field" name="${LOGIN_ATTRIBUTE}" tabindex="1" type="text" required="required">
-      <label for="password">
-        Password <a href="/password_reset" class="label-link">Forgot password?</a>
-      </label>
-      <input class="form-control input-block" id="password" name="${PASSWORD_ATTRIBUTE}" tabindex="2" type="password" required="required">
+          <%--<fieldset>--%>
+            <%--<legend>--%>
+              <%--<fmt:message key="FolowPath" />--%>
+            <%--</legend>--%>
+            <%--<fmt:message key="InitialStop" />--%>
+            <%--<br /> <input type="text" required="required" size="40"--%>
+                          <%--name="startStop"><br />--%>
+            <%--<fmt:message key="EntStop" />--%>
+            <%--<br /> <input type="text" size="40" name="finishStop"--%>
+                          <%--required="required">--%>
+            <%--<div style="color: red;">--%>
+              <%--<c:out value="${result}" />--%>
+            <%--</div>--%>
+          <%--</fieldset>--%>
 
-      <input class="btn btn-primary btn-block" name="command" tabindex="3" type="submit" value="${AUTENTIFICATION_COMMAND}">
+        <%--</div>--%>
+
+
+
+
+        <%--<div class="inlineDiv">--%>
+          <%--<fieldset>--%>
+            <%--<legend>--%>
+              <%--<fmt:message key="ChooseTransport" />--%>
+            <%--</legend>--%>
+            <%--<input type="checkbox" name="transportType" value="Bus">--%>
+            <%--<fmt:message key="Bus" />--%>
+            <%--<br /> <input type="checkbox" name="transportType" value="Tram">--%>
+            <%--<fmt:message key="Tram" />--%>
+            <%--<br /> <input type="checkbox" name="transportType"--%>
+                          <%--value="Trolleybus">--%>
+            <%--<fmt:message key="Trolleybus" />--%>
+          <%--</fieldset>--%>
+
+        <%--</div>--%>
+
+
+
+        <%--<div class="inlineDiv">--%>
+          <%--<button type="submit" class="my_link " name="command"--%>
+                  <%--value="${FIND_ROUTES_BY_STOPS_COMMAND}">--%>
+            <%--<fmt:message key="FindRoute" />--%>
+          <%--</button>--%>
+        <%--</div>--%>
+      </form>
     </div>
+    <div style="display: block; margin-top: 200px;">
+
+      <ol>
+        <c:forEach items="${routeMap}" var="route_item">
+          <li>
+            <div class="routeItem">
+              <table width="900px" cellspacing="2" border="1" cellpadding="5">
+                <tr>
+                  <td><fmt:message key="RouteID" /></td>
+                  <td colspan="3"><fmt:message key="RouteName" /></td>
+                </tr>
+                <tr>
+                  <td><c:out value="${route_item.key.id}" /></td>
+                  <td colspan="3"><c:out value="${route_item.key.name}" /></td>
+                </tr>
+                <c:if test="${route_item.value!= null}">
+                  <tr>
+                    <td><fmt:message key="StopNumber" /></td>
+                    <td><fmt:message key="ID" /></td>
+                    <td><fmt:message key="Name" /></td>
+                    <td><fmt:message key="Address" /></td>
+                  </tr>
+                </c:if>
+                <c:set var="count" value="1" scope="page" />
+                <c:forEach items="${route_item.value}" var="routeStopItem"
+                           varStatus="status">
+                  <tr>
+                    <td><c:out value="${count}" /> <c:set var="count"
+                                                          value="${count + 1}" scope="page" /></td>
+                    <td><c:out value="${routeStopItem.id}" /></td>
+                    <td><c:out value="${routeStopItem.name}" /></td>
+                    <td><c:out value="${routeStopItem.address}" /></td>
+                  </tr>
+                </c:forEach>
+                <tr>
+                  <td colspan="2"><a class="my_link_smal"
+                                     href="./TransportServlet?command=${FIND_SCHEDULE_OF_STOPS_FOR_ROUTE_COMMAND}&route_id=${route_item.key.id}"><fmt:message
+                          key="ViewSchedule" /></a></td>
+                  <td colspan="2"><a class="my_link_smal"
+                                     href="./TransportServlet?command=${FIND_TRANSPORT_FOR_ROUTE_SCHEDULES}&route_id=${route_item.key.id}"><fmt:message
+                          key="TransportInfo" /></a></td>
+                </tr>
+              </table>
+            </div>
+          </li>
+        </c:forEach>
+      </ol>
     </div>
-</form>
+  </div>
 </fmt:bundle>
 </body>
 </html>
-

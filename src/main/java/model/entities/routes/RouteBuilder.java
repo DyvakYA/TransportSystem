@@ -1,18 +1,18 @@
 package model.entities.routes;
 
-import model.entities.drivers.UrbanDriver;
-import model.entities.setOfStops.SetOfStops;
-import model.entities.transports.Transport;
+import model.entities.Driver;
+import model.entities.SetOfStops;
+import model.entities.Transport;
 
 /**
  * Created by Dyvak on 22.12.2016.
  */
 public class RouteBuilder {
-    UrbanDriver driver;
+    Driver driver;
     Transport transport;
     SetOfStops stops;
 
-    public RouteBuilder buildDriver(UrbanDriver driver){
+    public RouteBuilder buildDriver(Driver driver){
             this.driver=driver;
             return this;
         }

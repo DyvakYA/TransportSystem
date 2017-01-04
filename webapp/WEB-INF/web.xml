@@ -11,8 +11,9 @@
     <display-name>Archetype Created Web Application</display-name>
     <servlet>
         <servlet-name>TransportServlet</servlet-name>
-        <servlet-class>model.servlets.TransportServlet</servlet-class>
+        <servlet-class>model.servlet.TransportServlet</servlet-class>
     </servlet>
+
     <servlet-mapping>
         <servlet-name>TransportServlet</servlet-name>
         <url-pattern>/TransportServlet</url-pattern>

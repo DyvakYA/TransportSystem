@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package model.extras;
 
 import javax.servlet.http.HttpServletRequest;
@@ -14,17 +9,17 @@ import static model.commands.user.ChangeLocaleCommand.LOCALE_ATTRIBUTE;
 
 public class Localization {
 
-    public static model.extras.Localization instance = new model.extras.Localization();
+    public static Localization instance = new Localization();
 
-    private static final String MSG_PROPERTIE_BASE_PATH = "/messages.properties";
-    private static final String LABEL_PROPERTIE_BASE_PATH = "/labels.properties";
-    private static final String ERROR_MSG_PROPERTIE_BASE_PATH = "/error_messages.properties";
+    private static final String MSG_PROPERTIE_BASE_PATH = "messages";
+    private static final String LABEL_PROPERTIE_BASE_PATH = "labels";
+    private static final String ERROR_MSG_PROPERTIE_BASE_PATH = "/error_messages";
 
     private Localization() {
 
     }
 
-    public static model.extras.Localization getInstanse() {
+    public static Localization getInstanse() {
         return instance;
     }
 

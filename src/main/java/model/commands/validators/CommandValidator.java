@@ -5,7 +5,6 @@ import javax.servlet.http.HttpServletResponse;
 
 public interface CommandValidator {
 
-
     boolean validate(HttpServletRequest request, HttpServletResponse response);
 
 }

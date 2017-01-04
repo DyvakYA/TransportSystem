@@ -1,5 +1,6 @@
 package model.commands;
 
+import model.commands.transport.TransportCommandFactory;
 import model.commands.user.AutentificateUserCommand;
 import model.commands.user.ChangeLocaleCommand;
 import model.commands.user.RegisterUserCommand;
@@ -11,7 +12,7 @@ public class CommandFactory {
     public static final String AUTENTIFICATION_COMMAND = "autentification";
     public static final String CHANGE_LOCALE_COMMAND = "changeLocaleCommand";
 
-    private static final String TRANSPORT_COMMANDS = "Transport";
+    private static final String TRANSPORT_COMMAND = "Transport";
     private static final String STOP_COMMANDS = "Stop";
     private static final String ROUTE_COMMANDS = "Route";
     private static final String SCHEDULE_COMMANDS = "Schedule";
@@ -28,6 +29,8 @@ public class CommandFactory {
     }
 
     public Command getCommand(String name) {
+        System.out.println(name);
+
 
         if (name == null) {
         }
@@ -65,13 +68,13 @@ public class CommandFactory {
 //            }
 //        }
 //
-//        if (name.contains(TRANSPORT_COMMANDS)) {
-//            TransportCommandFactory transportFactory = TransportCommandFactory
-//                    .getInstanse();
-//            if (transportFactory.getTransportCommand(name) != null) {
-//                return transportFactory.getTransportCommand(name);
-//            }
-//        }
+        if (name.contains(TRANSPORT_COMMAND)) {
+            TransportCommandFactory transportFactory = TransportCommandFactory
+                    .getInstanse();
+            if (transportFactory.getTransportCommand(name) != null) {
+                return transportFactory.getTransportCommand(name);
+            }
+        }
 
         if (name.contains(AUTENTIFICATION_COMMAND)) {
             return new AutentificateUserCommand();

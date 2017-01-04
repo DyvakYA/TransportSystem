@@ -1,10 +1,10 @@
-package ua.kpi.epam.transport.commands.transport;
+package model.commands.transport;
 
+import model.extras.Localization;
 import org.apache.log4j.Logger;
-import ua.kpi.epam.transport.dao.DaoFactory;
-import ua.kpi.epam.transport.dao.TransportDao;
-import ua.kpi.epam.transport.entities.Transport;
-import ua.kpi.epam.transport.extras.LocalizationHelper;
+import model.dao.DaoFactory;
+import model.dao.TransportDao;
+import model.entities.Transport;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-import static ua.kpi.epam.transport.servlets.TransportServlet.LOGGER_NAME;
+import static model.servlet.TransportServlet.LOGGER_NAME;
 
 /**
  *
@@ -41,7 +41,7 @@ public class FindAllTransportCommand implements TransportCommand {
                     response);
         } catch (ServletException | IOException e) {
             Logger logger = (Logger) request.getServletContext().getAttribute(LOGGER_NAME);
-            logger.error(LocalizationHelper.getInstanse().getLocalizedErrorMsg(SERVLET_EXCEPTION), e);
+            logger.error(Localization.getInstanse().getLocalizedErrorMsg(SERVLET_EXCEPTION), e);
         }
 
     }

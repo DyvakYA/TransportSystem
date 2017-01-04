@@ -15,12 +15,8 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Locale;
 
-import static model.servlets.TransportServlet.LOGGER_NAME;
+import static model.servlet.TransportServlet.LOGGER_NAME;
 
-/**
- *
- * @author KIRIL
- */
 public class ChangeLocaleCommand implements Command {
 
     /**
@@ -70,5 +66,7 @@ public class ChangeLocaleCommand implements Command {
             return new Locale(EN_LANGUAGE, US_COUNTRY);
         }
         return null;
+
     }
+
 }

@@ -3,7 +3,7 @@ package model.commands.user;
 import model.commands.Command;
 import model.dao.DaoFactory;
 import model.dao.UserDao;
-import model.entities.users.User;
+import model.entities.User;
 import model.extras.Localization;
 import org.apache.log4j.Logger;
 
@@ -13,12 +13,12 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-import static model.servlets.TransportServlet.LOGGER_NAME;
+import static model.servlet.TransportServlet.LOGGER_NAME;
 
 public class FindAllUsersCommand implements Command {
 
     private static final String SERVLET_EXCEPTION = "ForwardRequestServletException";
-    private static final String DESTINATION_PAGE = "./index.jsp";
+    private static final String DESTINATION_PAGE = "./index2.jsp";
     private static final String USER_LIST = "userList";
 
     @Override

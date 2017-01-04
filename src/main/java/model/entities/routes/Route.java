@@ -1,24 +1,24 @@
 package model.entities.routes;
 
-import model.entities.drivers.UrbanDriver;
-import model.entities.setOfStops.SetOfStops;
-import model.entities.transports.Transport;
+import model.entities.Driver;
+import model.entities.SetOfStops;
+import model.entities.Transport;
 
 /**
  * Created by Dyvak on 22.12.2016.
  */
 public class Route implements RoutePlan{
 
-    UrbanDriver driver;
+    Driver driver;
     Transport transport;
     SetOfStops stops;
 
-    public UrbanDriver getDriver() {
+    public Driver getDriver() {
         return driver;
     }
 
     @Override
-    public void setDriver(UrbanDriver driver) {
+    public void setDriver(Driver driver) {
         this.driver = driver;
     }
 

@@ -32,12 +32,10 @@ div {
 
 .auth-form-header {
     padding: 10px 20px;
-
     width: 300px;
     color: #fff;
     text-shadow: 0 -1px 0 rgba(0,0,0,0.3);
     background-color: #88B04B;
-    margin: auto;
     border: 1px solid #768995;
     border-radius: 3px 3px 0 0;
 }
@@ -47,7 +45,6 @@ div {
     font-size: 14px;
     width: 300px;
     background-color: #fff;
-    margin: auto;
     border: 1px solid #d8dee2;
     border-top-color: initial;
     border-top-style: initial;

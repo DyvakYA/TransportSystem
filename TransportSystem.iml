@@ -23,15 +23,7 @@
       <sourceFolder url="file://$MODULE_DIR$/src/main/java" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/main/resources" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/test/java" isTestSource="true" />
-      <excludeFolder url="file://$MODULE_DIR$/src/main/java/model/commands/route" />
-      <excludeFolder url="file://$MODULE_DIR$/src/main/java/model/commands/schedule" />
-      <excludeFolder url="file://$MODULE_DIR$/src/main/java/model/commands/schedule_of_stop" />
-      <excludeFolder url="file://$MODULE_DIR$/src/main/java/model/commands/stop" />
-      <excludeFolder url="file://$MODULE_DIR$/src/main/java/model/commands/transport" />
-      <excludeFolder url="file://$MODULE_DIR$/src/main/java/model/commands/validators/route" />
-      <excludeFolder url="file://$MODULE_DIR$/src/main/java/model/commands/validators/schedule" />
-      <excludeFolder url="file://$MODULE_DIR$/src/main/java/model/commands/validators/stop" />
-      <excludeFolder url="file://$MODULE_DIR$/src/main/java/model/commands/validators/transport" />
+      <excludeFolder url="file://$MODULE_DIR$/src/main/java/model/entities/routes" />
       <excludeFolder url="file://$MODULE_DIR$/target" />
     </content>
     <orderEntry type="inheritedJdk" />
