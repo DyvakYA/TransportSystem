@@ -3,9 +3,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@page
-	import="commands.transport.TransportCommandFactory"%>
+	import="controller.commands.past_transport.TransportCommandFactory"%>
 <%@page
-	import="commands.transport.TransportCommand"%>
+	import="controller.commands.past_transport.TransportCommand"%>
 <%@ page errorPage="error.jsp"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>

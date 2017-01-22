@@ -3,9 +3,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ page
-	import="commands.route.RouteCommandFactory"%>
+	import="controller.commands.past_route.RouteCommandFactory"%>
 <%@ page errorPage="error.jsp"%>
-<%--<%@ taglib prefix="transport" uri="/WEB-INF/tlds/transportTagLib"%>--%>
+<%--<%@ taglib prefix="past_transport" uri="/WEB-INF/tlds/transportTagLib"%>--%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -19,11 +19,11 @@
 	<fmt:bundle basename="ua.kpi.epam.transport.properties.labels">
 		<div style="margin: 0 auto; width: 1000px">
 			<div style="display: block; margin: 20px;">
-				<a class="my_link" href="./index.jsp"><fmt:message
+				<a class="my_link" href="index1.jsp"><fmt:message
 						key="RouteSeach" /></a> <a class="my_link"
 					href="./TransportServlet?command=${FIND_ALL_ROUTE_AND_STOPS_COMMAND}"><fmt:message
 						key="RouteSchemes" /></a> <a class="my_link"
-					href="./autentification.jsp"><fmt:message key="EnterSystem" /></a>
+					href="autentification1.jsp"><fmt:message key="EnterSystem" /></a>
 			</div>
 
 			<div style="display: block; margin-top: 60px;">

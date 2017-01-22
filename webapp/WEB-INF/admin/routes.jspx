@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page"
+          xmlns:c="http://java.sun.com/jsp/jstl/core" version="2.0" xmlns:fmt="http://java.sun.com/jsp/jstl/fmt">
+    <jsp:directive.page language="java"
+        contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1" />
+    <jsp:text>
+        <![CDATA[ <?xml version="1.0" encoding="ISO-8859-1" ?> ]]>
+    </jsp:text>
+    <jsp:text>
+        <![CDATA[ <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> ]]>
+    </jsp:text>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<title>Insert title here</title>
+    <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+<a href="./rest/user"><fmt:message key="Users" /></a>
+
+<a href="./rest/driver"><fmt:message key="Drivers" /></a>
+
+<a href="./rest/route"><fmt:message key="Routes" /></a>
+
+<a href="./rest/stop"><fmt:message key="Stops" /></a>
+
+<a href="./rest/plan"><fmt:message key="Plans" /></a>
+
+<a href="./rest/transport"><fmt:message key="Transports" /></a>
+<br />
+<table width="900px" cellspacing="2" border="1" cellpadding="5">
+
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+        </tr>
+
+    <c:forEach var="routes" items="${routesList}">
+        <tr>
+            <td>${routes.id}</td>
+            <td>${routes.name}</td>
+        </tr>
+    </c:forEach>
+</table>
+</body>
+</html>
+</jsp:root>

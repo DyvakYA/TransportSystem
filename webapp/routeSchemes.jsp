@@ -3,11 +3,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@page
-	import="commands.transport.TransportCommandFactory"%>
+	import="controller.commands.past_transport.TransportCommandFactory"%>
 <%@page
-	import="commands.route.RouteCommandFactory"%>
+	import="controller.commands.past_route.RouteCommandFactory"%>
 <%@page
-	import="commands.plan_of_stops.PlanOfStopsCommandFactory"%>
+	import="controller.commands.plan_of_stops.PlanOfStopsCommandFactory"%>
 <%@ page errorPage="error.jsp"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -27,11 +27,11 @@
 		<div class="main">
 			<div style="display: block;">
 				<div style="display: block; margin: 20px;">
-					<a class="my_link" href="./index.jsp"><fmt:message
+					<a class="my_link" href="index1.jsp"><fmt:message
 							key="RouteSeach" /></a> <a class="my_link"
 						href="./TransportServlet?command=${FIND_ALL_ROUTE_AND_STOPS_COMMAND}"><fmt:message
 							key="RouteSchemes" /></a> <a class="my_link"
-						href="./autentification.jsp"><fmt:message key="EnterSystem" /></a>
+						href="autentification1.jsp"><fmt:message key="EnterSystem" /></a>
 				</div>
 			</div>
 			<div style="display: block; margin-top: 100px;">

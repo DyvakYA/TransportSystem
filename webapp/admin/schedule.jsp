@@ -3,8 +3,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@page
-	import="commands.plan.PlanCommandFactory"%>
-<%@page import="commands.plan.PlanCommand"%>
+	import="controller.commands.past_plan.PlanCommandFactory"%>
+<%@page import="controller.commands.past_plan.PlanCommand"%>
 <%@ page errorPage="error.jsp"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -33,7 +33,7 @@
 <c:set var="ROUTE_ID_ATTRIBUTE"
 	value="<%=PlanCommand.ROUTE_ID_ATTRIBUTE%>" />
 <c:set var="SCHEDULE_ID_ATTRIBUTE"
-	value="<%=PlanCommand.SCHEDULE_ID_ATTRIBUTE%>" />
+	value="<%=PlanCommand.PLAN_ID_ATTRIBUTE%>" />
 <c:set var="STOP_ID_ATTRIBUTE"
 	value="<%=PlanCommand.STOP_ID_ATTRIBUTE%>" />
 <c:set var="TRANSPORT_ID_ATTRIBUTE"
@@ -189,7 +189,7 @@
 									<td><input type="text" name="${ARRIVE_TIME_ATTRIBUTE}"></td>
 									<td><input type="text" name="${LEAVE_TIME_ATTRIBUTE}"></td>
 									<td><c:set var="schedule_id"
-											value="<%=request.getParameter(PlanCommand.SCHEDULE_ID_ATTRIBUTE)%>" />
+											value="<%=request.getParameter(PlanCommand.PLAN_ID_ATTRIBUTE)%>" />
 										<input type="hidden" name="${SCHEDULE_ID_ATTRIBUTE}"
 										value="${schedule_id}">
 									<td>
@@ -236,7 +236,7 @@
 					<c:if test="${currentCommand == SHOW_TRANSPORT_ON_SCHEDULE}">
 						<div class="routeItem">
 							<c:set var="schedule_id"
-								value="<%=request.getParameter(PlanCommand.SCHEDULE_ID_ATTRIBUTE)%>" />
+								value="<%=request.getParameter(PlanCommand.PLAN_ID_ATTRIBUTE)%>" />
 							<input type="hidden" name="${SCHEDULE_ID_ATTRIBUTE}"
 								value="${schedule_id}">
 							<table width="300px" cellspacing="2" border="1" cellpadding="5">
