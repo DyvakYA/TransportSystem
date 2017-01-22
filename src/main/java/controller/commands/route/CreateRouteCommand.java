@@ -19,19 +19,13 @@ public class CreateRouteCommand implements RouteCommand {
             throws ServletException, IOException {
 
         if (!new CreateRouteCommandValidator().validate(request, response)) {
-            return "";
+            return null;
         }
-
         Route route = new Route(request.getParameter(NAME_ATTRIBUTE));
-
         routeService.createRoute(route);
-
         request.setAttribute(RESULT_ATTRIBUTE, Localization.getInstanse()
                 .getLocalizedMessage(request, CREATE_ROUTE_SUCCESSFUL_MSG));
-
-            request.getRequestDispatcher(ADMIN_DESTINATION_PAGE).forward(request,
-                    response);
-
-        return "/WEB-INF/view/transportsList.jspx";
+        request.setAttribute(ROUTE_LIST_ATTRIBUTE, routeService.getAllRoutes());
+        return "/WEB-INF/admin/routes.jspx";
     }
 }

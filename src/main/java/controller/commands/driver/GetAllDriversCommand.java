@@ -1,6 +1,5 @@
 package controller.commands.driver;
 
-import controller.commands.Command;
 import model.entities.Driver;
 import model.services.DriverService;
 
@@ -10,7 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-public class GetAllDriversCommand implements Command {
+public class GetAllDriversCommand implements DriverCommand {
 
 	private DriverService driverService = DriverService.getInstance();
 
@@ -18,7 +17,7 @@ public class GetAllDriversCommand implements Command {
 	public String execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		List<Driver> drivers = driverService.getAllDrivers();
-		request.setAttribute("driversList", drivers);
+		request.setAttribute(DRIVER_LIST_ATTRIBUTE, drivers);
 		return "/WEB-INF/admin/drivers.jspx";
 	}
 

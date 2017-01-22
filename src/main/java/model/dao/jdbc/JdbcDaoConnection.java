@@ -23,7 +23,6 @@ public class JdbcDaoConnection implements DaoConnection {
 		try {
 			connection.close();
 		} catch (SQLException e) {
-
 			throw new RuntimeException(e);
 		}
 	}

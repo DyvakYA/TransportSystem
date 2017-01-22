@@ -12,7 +12,7 @@ public interface StopCommand extends Command {
 
     String RESULT_STOP_ATTRIBUTE = "past_stop";
 
-    String RESULT_LIST_ATTRIBUTE = "stopList";
+    String STOP_LIST_ATTRIBUTE = "stopsList";
 
     String ADMIN_DESTINATION_PAGE = "/admin/stops.jsp";
 }

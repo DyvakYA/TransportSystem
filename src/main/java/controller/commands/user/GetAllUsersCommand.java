@@ -11,14 +11,15 @@ import java.io.IOException;
 import java.util.List;
 
 public class GetAllUsersCommand implements Command {
-	
+
+	private static final String USERS_LIST_ATTRIBUTE = "usersList";
 	private UserService userService = UserService.getInstance();
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		List<User> users = userService.getAllUsers();
-		request.setAttribute("usersList", users);
+		request.setAttribute(USERS_LIST_ATTRIBUTE, users);
 		return "/WEB-INF/admin/users.jspx";
 	}
 	

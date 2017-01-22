@@ -20,24 +20,15 @@ public class UpdateRouteCommand implements RouteCommand {
             throws ServletException, IOException {
 
         if (!new UpdateRouteCommandValidator().validate(request, response)) {
-            return "";
+            return null;
         }
-
         Route route = new Route(Integer.parseInt(request.getParameter(ID_ATTRIBUTE)),
                 request.getParameter(Command.NAME_ATTRIBUTE));
-
         routeService.updateRoute(route, route.getId());
-
         request.setAttribute(Command.RESULT_ATTRIBUTE, Localization.getInstanse()
-                .getLocalizedMessage(request, UPDATE_ROUTE_SUCCESSFUL_MSG));
-
-            request.setAttribute(STOP_LIST_ATTRIBUTE, routeService.getAllRoutes());
-
-            request.getRequestDispatcher(ADMIN_DESTINATION_PAGE).forward(
-                    request, response);
-
-
-        return UPDATE_ROUTE_SUCCESSFUL_MSG;
+            .getLocalizedMessage(request, UPDATE_ROUTE_SUCCESSFUL_MSG));
+        request.setAttribute(ROUTE_LIST_ATTRIBUTE, routeService.getAllRoutes());
+        return "/WEB-INF/admin/routes.jspx";
     }
 
 }

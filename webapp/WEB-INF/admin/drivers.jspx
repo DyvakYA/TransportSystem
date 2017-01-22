@@ -1,51 +1,94 @@
-<?xml version="1.0" encoding="ISO-8859-1" ?>
+<?xml version="1.0" encoding="UTF-8" ?>
+
 <jsp:root xmlns:jsp="http://java.sun.com/JSP/Page"
           xmlns:c="http://java.sun.com/jsp/jstl/core" version="2.0" xmlns:fmt="http://java.sun.com/jsp/jstl/fmt">
     <jsp:directive.page language="java"
-        contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1" />
+        contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" />
     <jsp:text>
-        <![CDATA[ <?xml version="1.0" encoding="ISO-8859-1" ?> ]]>
+        <![CDATA[ <?xml version="1.0" encoding="UTF-8" ?> ]]>
     </jsp:text>
     <jsp:text>
         <![CDATA[ <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> ]]>
     </jsp:text>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>Insert title here</title>
     <link rel="stylesheet" href="./style.css" />
 </head>
 <body>
-<a href="./rest/user"><fmt:message key="Users" /></a>
-
-<a href="./rest/driver"><fmt:message key="Drivers" /></a>
-
-<a href="./rest/route"><fmt:message key="Routes" /></a>
-
-<a href="./rest/stop"><fmt:message key="Stops" /></a>
-
-<a href="./rest/plan"><fmt:message key="Plans" /></a>
-
-<a href="./rest/transport"><fmt:message key="Transports" /></a>
+<fmt:bundle basename="labels">
+<a class="my_link" href="./rest/user"><fmt:message key="Users" /></a>
+<a class="my_link" href="./rest/driver"><fmt:message key="Drivers" /></a>
+<a class="my_link" href="./rest/route"><fmt:message key="Routes" /></a>
+<a class="my_link" href="./rest/stop"><fmt:message key="Stops" /></a>
+<a class="my_link" href="./rest/plan"><fmt:message key="Plans" /></a>
+<a class="my_link" href="./rest/transport"><fmt:message key="Transports" /></a>
 <br />
 <table width="900px" cellspacing="2" border="1" cellpadding="5">
-    <c:forEach var="drivers" items="${driversList}">
 
         <tr>
-            <th>Id</th>
-            <th>Name</th>
-            <th>Surname</th>
-            <th>Age</th>
+            <th><fmt:message key="Id" /></th>
+            <th><fmt:message key="Name" /></th>
+            <th><fmt:message key="Surname" /></th>
+            <th><fmt:message key="Age" /></th>
+            <th><fmt:message key="RouteId" /></th>
         </tr>
+
+    <c:forEach var="drivers" items="${driversList}">
 
         <tr>
             <td>${drivers.id}</td>
             <td>${drivers.name}</td>
             <td>${drivers.surname}</td>
             <td>${drivers.age}</td>
+            <td>${drivers.routeId}</td>
         </tr>
     </c:forEach>
 </table>
+
+    <form method="post" action="./TransportServlet">
+    <table>
+
+        <tr>
+            <td><fmt:message key="Id" /></td>
+            <td><fmt:message key="Name" /></td>
+            <td><fmt:message key="Surname" /></td>
+            <td><fmt:message key="Age" /></td>
+            <td><fmt:message key="RouteId" /></td>
+        </tr>
+        <tr>
+            <td><input type="text" name="driver_id"></input></td>
+            <td><input type="text" name="name"></input></td>
+            <td><input type="text" name="surname"></input></td>
+            <td><input type="text" name="age"></input></td>
+            <td><input type="text" name="route_id"></input></td>
+        </tr>
+        <tr>
+            <td colspan="3"></td>
+        </tr>
+    </table>
+
+    <select name="command">
+        <option value="createDriver"><fmt:message
+                key="CreateDriverCommand" /></option>
+        <option value="updateDriver"><fmt:message
+                key="UpdateDriverCommand" /></option>
+        <option value="deleteDriver"><fmt:message
+                key="DeleteDriverCommand" /></option>
+        <option value="getAllDrivers"><fmt:message
+                key="GetAllDriversCommand" /></option>
+    </select>
+    <button class="my_link_smal" type="submit">
+        <fmt:message key="ExecuteCommand" />
+    </button>
+    <br />
+    <div style="color: red;">
+        <c:out value="${result}" />
+    </div>
+
+</form>
+</fmt:bundle>
 </body>
 </html>
 </jsp:root>

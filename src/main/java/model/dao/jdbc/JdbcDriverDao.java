@@ -20,7 +20,7 @@ public class JdbcDriverDao implements DriverDao {
 
     private static final String SELECT_FROM_DRIVERS_WHERE_NAME = "SELECT * FROM drivers WHERE name=?";
 
-    private static final String CREATE_DRIVER_QUERY = "INSERT INTO drivers (name, surname, age)  VALUES (?, ?, ?)";
+    private static final String CREATE_DRIVER_QUERY = "INSERT INTO drivers (name, surname, age, route_id)  VALUES (?, ?, ?, ?)";
     private static final String UPDATE_DRIVER_QUERY = "UPDATE drivers SET name=?, surname=?, age=? WHERE driver_id=?";
     private static final String DELETE_DRIVER_QUERY = "DELETE FROM drivers WHERE driver_id=?";
 
@@ -97,8 +97,7 @@ public class JdbcDriverDao implements DriverDao {
             query.setString( 1 , driver.getName());
             query.setString(2, driver.getSurname());
             query.setInt(3, driver.getAge());
-
-
+            query.setInt(4, driver.getRouteId());
             query.executeUpdate();
             ResultSet keys =  query.getGeneratedKeys();
             if( keys.next()){

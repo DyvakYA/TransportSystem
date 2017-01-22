@@ -19,7 +19,6 @@ public abstract class DaoFactory {
     public abstract StopDao createStopDao(DaoConnection connection);
     public abstract TransportDao createTransportDao(DaoConnection connection);
     public abstract UserDao createUserDao(DaoConnection connection);
-    public abstract UserDao createUserDao();
 
     public static final String DB_FILE = "/db.properties";
     private static final String DB_FACTORY_CLASS = "factory.class";

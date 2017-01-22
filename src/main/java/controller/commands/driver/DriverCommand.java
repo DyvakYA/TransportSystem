@@ -8,7 +8,7 @@ public interface DriverCommand extends Command {
     String UPDATE_DRIVER_SUCCESSFUL_MSG = "UpdateDriverSuccessful";
     String DELETE_DRIVER_SUCCESSFUL_MSG = "DeleteDriverSuccessful";
 
-    String DRIVER_LIST_ATTRIBUTE = "driverList";
+    String DRIVER_LIST_ATTRIBUTE = "driversList";
 
     String RESULT_SCHEDULE_LIST = "scheduleList";
 
@@ -20,7 +20,7 @@ public interface DriverCommand extends Command {
 
     String DRIVER_ID_ATTRIBUTE = "driver_id";
 
-    String ADMIN_DESTINATION_PAGE = "admin/driver.jsp";
+    String ADMIN_DESTINATION_PAGE = "admin/drivers.jspx";
 
     String PLAN_ID_ATTRIBUTE = "planId";
 

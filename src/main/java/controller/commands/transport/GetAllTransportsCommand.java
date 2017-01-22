@@ -1,6 +1,5 @@
 package controller.commands.transport;
 
-import controller.commands.Command;
 import model.entities.Transport;
 import model.services.TransportService;
 
@@ -13,7 +12,7 @@ import java.util.List;
 /**
  * Created by Dyvak on 21.01.2017.
  */
-public class GetAllTransportsCommand implements Command {
+public class GetAllTransportsCommand implements TransportCommand {
 
     private TransportService transportService = TransportService.getInstance();
 
@@ -22,7 +21,7 @@ public class GetAllTransportsCommand implements Command {
             throws ServletException, IOException {
 
         List<Transport> transports = transportService.getAllTransports();
-        request.setAttribute("transportsList", transports);
+        request.setAttribute(TRANSPORT_LIST_ATTRIBUTE, transports);
         return "/WEB-INF/admin/transports.jspx";
     }
 }

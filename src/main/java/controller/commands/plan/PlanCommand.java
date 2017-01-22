@@ -7,7 +7,7 @@ public interface PlanCommand extends Command {
     String CREATE_PLAN_SUCCESSFUL_MSG = "PlanCreatedSuccessful";
     String DELETE_PLAN_SUCCESSFUL_MSG = "DeletePlanSuccessful";
 
-    String RESULT_ROUTES_LIST = "routeList";
+    String PLAN_LIST_ATTRIBUTE = "plansList";
 
     String RESULT_SCHEDULE_LIST = "scheduleList";
 

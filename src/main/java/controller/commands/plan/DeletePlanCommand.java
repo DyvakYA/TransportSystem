@@ -16,18 +16,13 @@ public class DeletePlanCommand implements PlanCommand {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
         planService.deletePlan(
                 Integer.parseInt(request
                 .getParameter(PLAN_ID_ATTRIBUTE)));
-
         request.setAttribute(Command.RESULT_ATTRIBUTE, Localization.getInstanse()
                 .getLocalizedMessage(request, DELETE_PLAN_SUCCESSFUL_MSG));
-
-            request.getRequestDispatcher(ADMIN_DESTINATION_PAGE).forward(
-                    request, response);
-
-        return DELETE_PLAN_SUCCESSFUL_MSG;
+        request.setAttribute(PLAN_LIST_ATTRIBUTE, planService.getAllPlans());
+        return "/WEB-INF/admin/plans.jspx";
     }
 
 }

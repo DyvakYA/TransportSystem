@@ -15,8 +15,8 @@ public class CreateDriverCommandValidator implements CommandValidator {
     public boolean validate(HttpServletRequest request, HttpServletResponse response) {
 
         String message = Localization.getInstanse().getLocalizedMessage(request, DRIVER_ERROR_MSG);
-        
-        return CommandValidatorHelper.getInstance().isNullValidate(new String[]{DRIVER_ID_ATTRIBUTE,ROUTE_ID_ATTRIBUTE},
+
+        return CommandValidatorHelper.getInstance().isNullValidate(new String[]{ROUTE_ID_ATTRIBUTE},
                 RESULT_ATTRIBUTE, ADMIN_DESTINATION_PAGE, message, request, response);
     }
     

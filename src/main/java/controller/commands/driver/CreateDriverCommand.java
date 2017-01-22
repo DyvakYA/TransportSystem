@@ -1,8 +1,8 @@
 package controller.commands.driver;
 
 import controller.commands.validators.driver.CreateDriverCommandValidator;
-import model.extras.Localization;
 import model.entities.Driver;
+import model.extras.Localization;
 import model.services.DriverService;
 
 import javax.servlet.ServletException;
@@ -17,24 +17,19 @@ public class CreateDriverCommand implements DriverCommand {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
         if (!new CreateDriverCommandValidator().validate(request, response)) {
-            return "";
+            return null;
         }
-
-        Driver driver = new Driver(request.getParameter(NAME_ATTRIBUTE),
+        Driver driver = new Driver(
+                null,
+                request.getParameter(NAME_ATTRIBUTE),
                 request.getParameter(SURNAME_ATTRIBUTE),
                 Integer.parseInt(request.getParameter(AGE_ATTRIBUTE)),
                 Integer.parseInt(request.getParameter(ROUTE_ID_ATTRIBUTE)));
-
         driverService.createDriver(driver);
-
         request.setAttribute(RESULT_ATTRIBUTE, Localization.getInstanse()
                 .getLocalizedMessage(request, CREATE_DRIVER_SUCCESSFUL_MSG));
-
-            request.getRequestDispatcher(ADMIN_DESTINATION_PAGE).forward(request,
-                    response);
-
-        return CREATE_DRIVER_SUCCESSFUL_MSG;
+        request.setAttribute(DRIVER_LIST_ATTRIBUTE, driverService.getAllDrivers());
+        return "/WEB-INF/admin/drivers.jspx";
     }
 }

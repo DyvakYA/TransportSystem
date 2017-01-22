@@ -30,7 +30,6 @@ public class CommandValidatorHelper {
                     request.getRequestDispatcher(destPage).forward(
                             request, response);
                 } catch (ServletException | IOException e) {
-                    // TODO Auto-generated catch block
                     e.printStackTrace();
                 }
             }

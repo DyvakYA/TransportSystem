@@ -16,25 +16,15 @@ public class DeleteDriverCommand implements DriverCommand {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
         if (!new DeleteRouteCommandValidator().validate(request, response)) {
-            return "";
+            return null;
         }
-
-        int routeId = Integer.parseInt(request.getParameter(DRIVER_ID_ATTRIBUTE));
-
-        driverService.deleteDriver(routeId);
-
-            request.setAttribute(RESULT_ATTRIBUTE, Localization.getInstanse()
-                    .getLocalizedMessage(request, DELETE_DRIVER_SUCCESSFUL_MSG));
-
+        int driverId = Integer.parseInt(request.getParameter(DRIVER_ID_ATTRIBUTE));
+        driverService.deleteDriver(driverId);
+        request.setAttribute(RESULT_ATTRIBUTE, Localization.getInstanse()
+                .getLocalizedMessage(request, DELETE_DRIVER_SUCCESSFUL_MSG));
         request.setAttribute(DRIVER_LIST_ATTRIBUTE, driverService.getAllDrivers());
-
-            request.getRequestDispatcher(ADMIN_DESTINATION_PAGE).forward(
-                    request, response);
-
-        return DELETE_DRIVER_SUCCESSFUL_MSG;
-
+        return "/WEB-INF/admin/drivers.jspx";
     }
 
 }

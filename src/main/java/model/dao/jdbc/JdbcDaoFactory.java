@@ -61,11 +61,6 @@ public class JdbcDaoFactory extends DaoFactory {
     }
 
     @Override
-    public UserDao createUserDao() {
-        return new JdbcUserDao(connection);
-    }
-
-    @Override
     public UserDao createUserDao(DaoConnection connection) {
         JdbcDaoConnection jdbcConnection = (JdbcDaoConnection)connection;
         Connection sqlConnection = jdbcConnection.getConnection();

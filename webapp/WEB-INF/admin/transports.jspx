@@ -1,42 +1,43 @@
-<?xml version="1.0" encoding="ISO-8859-1" ?>
+<?xml version="1.0" encoding="UTF-8" ?>
+
 <jsp:root xmlns:jsp="http://java.sun.com/JSP/Page"
           xmlns:c="http://java.sun.com/jsp/jstl/core" version="2.0" xmlns:fmt="http://java.sun.com/jsp/jstl/fmt">
     <jsp:directive.page language="java"
-        contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1" />
+        contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" />
     <jsp:text>
-        <![CDATA[ <?xml version="1.0" encoding="ISO-8859-1" ?> ]]>
+        <![CDATA[ <?xml version="1.0" encoding="UTF-8" ?> ]]>
     </jsp:text>
     <jsp:text>
         <![CDATA[ <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> ]]>
     </jsp:text>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 <title>Insert title here</title>
     <link rel="stylesheet" href="./style.css" />
 </head>
 <body>
-<a href="./rest/user"><fmt:message key="Users" /></a>
+<fmt:bundle basename="labels">
+<a class="my_link" href="./rest/user"><fmt:message key="Users" /></a>
 
-<a href="./rest/driver"><fmt:message key="Drivers" /></a>
+<a class="my_link" href="./rest/driver"><fmt:message key="Drivers" /></a>
 
-<a href="./rest/route"><fmt:message key="Routes" /></a>
+<a class="my_link" href="./rest/route"><fmt:message key="Routes" /></a>
 
-<a href="./rest/stop"><fmt:message key="Stops" /></a>
+<a class="my_link" href="./rest/stop"><fmt:message key="Stops" /></a>
 
-<a href="./rest/plan"><fmt:message key="Plans" /></a>
+<a class="my_link" href="./rest/plan"><fmt:message key="Plans" /></a>
 
-<a href="./rest/transport"><fmt:message key="Transports" /></a>
+<a class="my_link" href="./rest/transport"><fmt:message key="Transports" /></a>
 <br />
 <table width="900px" cellspacing="2" border="1" cellpadding="5">
 
     <c:forEach var="transports" items="${transportsList}">
 
         <tr>
-            <th>Id</th>
-            <th>Type</th>
-            <th>Model</th>
-            <th>Number</th>
+            <th><fmt:message key="Id" /></th>
+            <th><fmt:message key="Type" /></th>
+            <th><fmt:message key="Model" /></th>
+            <th><fmt:message key="Number" /></th>
         </tr>
 
         <tr>
@@ -48,6 +49,7 @@
     </c:forEach>
 </table>
 
+    <form method="post" action="./TransportServlet">
 <table>
     <tr>
         <td><fmt:message key="Type" /></td>
@@ -76,15 +78,18 @@
     <option value="${DELETE_TRANSPORT_COMMAND}"><fmt:message
             key="DeleteTransportCommand" /></option>
     <option value="${FIND_ALL_TRANSPORT_COMMAND }"><fmt:message
-            key="ShowTransportCommand" /></option>
+            key="GetAllTransportsCommand" /></option>
 </select>
 <button class="my_link_smal" type="submit">
-    <fmt:message key="ExecuteTransportCommand" />
+    <fmt:message key="ExecuteCommand" />
 </button>
 <br />
 <div style="color: red;">
     <c:out value="${result}" />
 </div>
+
+</form>
+</fmt:bundle>
 </body>
 </html>
 </jsp:root>

@@ -21,18 +21,12 @@ public class CreateStopCommand implements StopCommand {
         if (!new CreateStopCommandValidator().validate(request, response)) {
             return "";
         }
-
         Stop stop = new Stop(request.getParameter(NAME_ATTRIBUTE),
                 request.getParameter(ADDRESS_ATTRIBUTE));
-
         stopService.createStop(stop);
-
         request.setAttribute(RESULT_ATTRIBUTE, Localization.getInstanse()
                 .getLocalizedMessage(request, CREATE_STOP_SUCCESSFUL_MSG ));
-
-            request.getRequestDispatcher(ADMIN_DESTINATION_PAGE).forward(request,
-                    response);
-
-        return CREATE_STOP_SUCCESSFUL_MSG;
+        request.setAttribute(STOP_LIST_ATTRIBUTE, stopService.getAllStops());
+        return "/WEB-INF/admin/stops.jspx";
     }
 }

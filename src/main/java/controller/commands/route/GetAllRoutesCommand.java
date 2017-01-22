@@ -1,6 +1,5 @@
 package controller.commands.route;
 
-import controller.commands.Command;
 import model.entities.Route;
 import model.services.RouteService;
 
@@ -13,7 +12,7 @@ import java.util.List;
 /**
  * Created by Dyvak on 21.01.2017.
  */
-public class GetAllRoutesCommand implements Command {
+public class GetAllRoutesCommand implements RouteCommand {
 
     private RouteService routeService = RouteService.getInstance();
 
@@ -21,7 +20,7 @@ public class GetAllRoutesCommand implements Command {
     public String execute(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         List<Route> routes = routeService.getAllRoutes();
-        request.setAttribute("routesList", routes);
+        request.setAttribute(ROUTE_LIST_ATTRIBUTE, routes);
         return "/WEB-INF/admin/routes.jspx";
     }
 }

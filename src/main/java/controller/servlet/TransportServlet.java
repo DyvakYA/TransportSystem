@@ -1,11 +1,23 @@
 package controller.servlet;
 
-import controller.commands.*;
+import controller.commands.Command;
+import controller.commands.driver.CreateDriverCommand;
+import controller.commands.driver.DeleteDriverCommand;
 import controller.commands.driver.GetAllDriversCommand;
+import controller.commands.driver.UpdateDriverCommand;
 import controller.commands.plan.GetAllPlansCommand;
+import controller.commands.route.CreateRouteCommand;
+import controller.commands.route.DeleteRouteCommand;
 import controller.commands.route.GetAllRoutesCommand;
+import controller.commands.route.UpdateRouteCommand;
+import controller.commands.stop.CreateStopCommand;
+import controller.commands.stop.DeleteStopCommand;
 import controller.commands.stop.GetAllStopsCommand;
+import controller.commands.stop.UpdateStopCommand;
+import controller.commands.transport.CreateTransportCommand;
+import controller.commands.transport.DeleteTransportCommand;
 import controller.commands.transport.GetAllTransportsCommand;
+import controller.commands.transport.UpdateTransportCommand;
 import controller.commands.user.AuthenticateUserCommand;
 import controller.commands.user.ChangeLocaleCommand;
 import controller.commands.user.GetAllUsersCommand;
@@ -44,7 +56,30 @@ public class TransportServlet extends HttpServlet {
     	commands.put("GET:/plan", new GetAllPlansCommand() );
     	commands.put("GET:/transport" , new GetAllTransportsCommand() );
     	commands.put("GET:/login",  new AuthenticateUserCommand());
+
     	commands.put("GET:/changeLocale",  new ChangeLocaleCommand());
+
+		commands.put("POST:/getAllUsers",  new GetAllUsersCommand());
+
+    	commands.put("POST:/createDriver",  new CreateDriverCommand());
+    	commands.put("POST:/updateDriver",  new UpdateDriverCommand());
+    	commands.put("POST:/deleteDriver",  new DeleteDriverCommand());
+    	commands.put("POST:/getAllDrivers",  new GetAllDriversCommand());
+
+		commands.put("POST:/createRoute",  new CreateRouteCommand());
+		commands.put("POST:/updateRoute",  new UpdateRouteCommand());
+		commands.put("POST:/deleteRoute",  new DeleteRouteCommand());
+		commands.put("POST:/getAllRoutes",  new GetAllRoutesCommand());
+
+		commands.put("POST:/createTransport",  new CreateTransportCommand());
+		commands.put("POST:/updateTransport",  new UpdateTransportCommand());
+		commands.put("POST:/deleteTransport",  new DeleteTransportCommand());
+		commands.put("POST:/getAllTransports",  new GetAllTransportsCommand());
+
+		commands.put("POST:/createStop",  new CreateStopCommand());
+		commands.put("POST:/updateStop",  new UpdateStopCommand());
+		commands.put("POST:/deleteStop",  new DeleteStopCommand());
+		commands.put("POST:/getAllStops",  new GetAllStopsCommand());
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -60,14 +95,23 @@ public class TransportServlet extends HttpServlet {
 	}
 	
 	void processRequest(HttpServletRequest request, HttpServletResponse response)  {
+
+
 		String method = request.getMethod().toUpperCase();
-		String path = request.getRequestURI();
-		path = path.replaceAll(".*/rest", "");
-		String key = method+":"+path;
+		String path;
+		if (method.equals("GET")) {
+			path = request.getRequestURI();
+			path = path.replaceAll(".*/rest/", "");
+		}else{
+			path = request.getParameter("command");
+			}
+		String key = method+":/"+path;
+		System.out.println(key);
 		Command command = commands.getOrDefault(key, (req , resp)->"/index.jsp" );
 		String viewPage = null;
 		try {
 			viewPage = command.execute(request, response);
+			System.out.println(viewPage);
 			request.getRequestDispatcher(viewPage)
 					.forward(request, response);
 		} catch (ServletException | IOException e) {

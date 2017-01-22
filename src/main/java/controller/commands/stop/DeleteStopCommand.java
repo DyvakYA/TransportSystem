@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-
 public class DeleteStopCommand implements StopCommand {
 
     private StopService stopService = StopService.getInstance();
@@ -19,20 +18,14 @@ public class DeleteStopCommand implements StopCommand {
             throws ServletException, IOException {
 
         if (!new DeleteStopCommandValidator().validate(request, response)) {
-            return "";
+            return null;
         }
-
         int stopId = Integer.valueOf(request.getParameter(ID_ATTRIBUTE));
-
         stopService.deleteStop(stopId);
-
         request.setAttribute(RESULT_ATTRIBUTE, Localization.getInstanse()
-                .getLocalizedMessage(request, DELETE_STOP_SUCCESSFUL_MSG));
-
-            request.getRequestDispatcher(ADMIN_DESTINATION_PAGE).forward(request,
-                    response);
-
-        return DELETE_STOP_SUCCESSFUL_MSG;
+            .getLocalizedMessage(request, DELETE_STOP_SUCCESSFUL_MSG));
+        request.setAttribute(STOP_LIST_ATTRIBUTE, stopService.getAllStops());
+        return "/WEB-INF/admin/stops.jspx";
 
     }
 

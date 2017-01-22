@@ -18,7 +18,7 @@ public interface TransportCommand extends Command {
 
     String TRANSPORT_RESULT_ATTRIBUTE ="past_transport";
 
-    String RESULT_LIST_ATTRIBUTE = "transportList";
+    String TRANSPORT_LIST_ATTRIBUTE = "transportsList";
 
     String RESULT_MAP_ATTRIBUTE = "transportMap";
 

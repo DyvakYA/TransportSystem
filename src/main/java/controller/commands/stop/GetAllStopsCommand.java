@@ -1,6 +1,5 @@
 package controller.commands.stop;
 
-import controller.commands.Command;
 import model.entities.Stop;
 import model.services.StopService;
 
@@ -13,7 +12,7 @@ import java.util.List;
 /**
  * Created by Dyvak on 21.01.2017.
  */
-public class GetAllStopsCommand implements Command {
+public class GetAllStopsCommand implements StopCommand {
 
     private StopService stopService = StopService.getInstance();
 
@@ -21,7 +20,7 @@ public class GetAllStopsCommand implements Command {
     public String execute(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         List<Stop> stops = stopService.getAllStops();
-        request.setAttribute("stopsList", stops);
+        request.setAttribute(STOP_LIST_ATTRIBUTE, stops);
         return "/WEB-INF/admin/stops.jspx";
     }
 }

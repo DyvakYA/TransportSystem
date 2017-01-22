@@ -16,7 +16,7 @@ public interface RouteCommand extends Command {
 
     String ID_ATTRIBUTE = "stop_id";
 
-    String RESULT_LIST_ATTRIBUTE = "routeList";
+    String ROUTE_LIST_ATTRIBUTE = "routesList";
 
     String RESULT_MAP_ATTRIBUTE = "routeMap";
 

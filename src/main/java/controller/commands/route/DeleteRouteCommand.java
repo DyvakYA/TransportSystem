@@ -19,24 +19,14 @@ public class DeleteRouteCommand implements RouteCommand {
             throws ServletException, IOException {
 
         if (!new DeleteRouteCommandValidator().validate(request, response)) {
-            return "";
+            return null;
         }
-
         int routeId = Integer.parseInt(request.getParameter(ROUTE_ID_ATTRIBUTE));
-
         routeService.deleteRoute(routeId);
-
-            request.setAttribute(Command.RESULT_ATTRIBUTE, Localization.getInstanse()
-                    .getLocalizedMessage(request, DELETE_ROUTE_SUCCESSFUL_MSG));
-
-        request.setAttribute(STOP_LIST_ATTRIBUTE, routeService.getAllRoutes());
-
-
-            request.getRequestDispatcher(ADMIN_DESTINATION_PAGE).forward(
-                    request, response);
-
-        return DELETE_ROUTE_SUCCESSFUL_MSG;
-
+        request.setAttribute(Command.RESULT_ATTRIBUTE, Localization.getInstanse()
+            .getLocalizedMessage(request, DELETE_ROUTE_SUCCESSFUL_MSG));
+        request.setAttribute(ROUTE_LIST_ATTRIBUTE, routeService.getAllRoutes());
+        return "/WEB-INF/admin/routes.jspx";
     }
 
 }

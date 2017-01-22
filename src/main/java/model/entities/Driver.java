@@ -5,16 +5,16 @@ package model.entities;
  */
 public class Driver {
 
-    private int id;
+    private Integer id;
     private String name;
     private String surname;
-    int age;
-    int routeId;
+    private int age;
+    private int routeId;
 
     public Driver() {
     }
 
-    public Driver(int id, String name, String lastName, int age,int routeId) {
+    public Driver(Integer id, String name, String lastName, int age,int routeId) {
         this.id = id;
         this.name = name;
         this.surname = lastName;
@@ -22,9 +22,9 @@ public class Driver {
         this.routeId = routeId;
     }
 
-    public Driver( String name, String lastName, int age,int routeId) {
+    public Driver( String name, String surname, int age,int routeId) {
         this.name = name;
-        this.surname = lastName;
+        this.surname = surname;
         this.age = age;
         this.routeId = routeId;
     }
@@ -109,6 +109,7 @@ public class Driver {
                 ", name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
                 ", age=" + age +
+                ", routeId=" + routeId +
                 '}';
     }
 }

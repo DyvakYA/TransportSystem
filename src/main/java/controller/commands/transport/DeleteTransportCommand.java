@@ -18,20 +18,14 @@ public class DeleteTransportCommand implements TransportCommand {
             throws ServletException, IOException {
 
         if (!new DeleteTransportCommandValidator().validate(request, response)) {
-            return "";
+            return null;
         }
-
         int transportId = Integer.parseInt(request.getParameter(ID_ATTRIBUTE));
-
         transportService.deleteTransport(transportId);
-
         request.setAttribute(RESULT_ATTRIBUTE, Localization.getInstanse()
                 .getLocalizedMessage(request, DELETE_TRANSPORT_SUCCESSFUL_MSG));
-
-            request.getRequestDispatcher(ADMIN_DESTINATION_PAGE).forward(request,
-                    response);
-
-        return DELETE_TRANSPORT_SUCCESSFUL_MSG;
+        request.setAttribute(TRANSPORT_LIST_ATTRIBUTE, transportService.getAllTransports());
+        return "/WEB-INF/admin/transports.jspx";
 
     }
 

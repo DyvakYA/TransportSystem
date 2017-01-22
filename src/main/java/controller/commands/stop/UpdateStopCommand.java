@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-
 public class UpdateStopCommand implements StopCommand {
 
     private StopService stopService = StopService.getInstance();
@@ -21,22 +20,16 @@ public class UpdateStopCommand implements StopCommand {
             throws ServletException, IOException {
 
         if (!new UpdateStopCommandValidator().validate(request, response)) {
-            return "";
+            return null;
         }
-
         Stop stop = new Stop(Integer.parseInt(request.getParameter(ID_ATTRIBUTE)),
                 request.getParameter(Command.NAME_ATTRIBUTE),
                 request.getParameter(Command.ADDRESS_ATTRIBUTE));
-
         stopService.updateStop(stop, stop.getId());
-
         request.setAttribute(Command.RESULT_ATTRIBUTE, Localization.getInstanse()
                 .getLocalizedMessage(request, UPDATE_STOP_SUCCESSFUL_MSG));
-
-            request.getRequestDispatcher(ADMIN_DESTINATION_PAGE).forward(request,
-                    response);
-
-        return UPDATE_STOP_SUCCESSFUL_MSG;
+        request.setAttribute(STOP_LIST_ATTRIBUTE, stopService.getAllStops());
+        return "/WEB-INF/admin/stops.jspx";
     }
 
 }

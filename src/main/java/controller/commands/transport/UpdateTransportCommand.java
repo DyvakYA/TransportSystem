@@ -21,22 +21,16 @@ public class UpdateTransportCommand implements TransportCommand {
             throws ServletException, IOException {
 
         if (!new UpdateTransportCommandValidator().validate(request, response)) {
-            return "";
+            return null;
         }
-
         Transport transport = new Transport(Integer.valueOf(request.getParameter(ID_ATTRIBUTE)),
                 TransportType.valueOf(request.getParameter(TYPE_ATTRIBUTE).toUpperCase()),
                 request.getParameter(MODEL_ATTRIBUTE),
                 String.valueOf(request.getParameter(NUMBER_ATTRIBUTE)));
-
         transportService.updateTransport(transport, transport.getId());
-
         request.setAttribute(Command.RESULT_ATTRIBUTE, Localization.getInstanse()
                 .getLocalizedMessage(request, UPDATE_TRANSPORT_SUCCESSFUL_MSG));
-
-            request.getRequestDispatcher(ADMIN_DESTINATION_PAGE).forward(request,
-                    response);
-
-        return UPDATE_TRANSPORT_SUCCESSFUL_MSG;
+        request.setAttribute(TRANSPORT_LIST_ATTRIBUTE, transportService.getAllTransports());
+        return "/WEB-INF/admin/transports.jspx";
     }
 }
