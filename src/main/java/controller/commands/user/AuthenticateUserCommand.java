@@ -2,12 +2,13 @@ package controller.commands.user;
 
 import controller.commands.Command;
 import model.entities.User;
-import model.services.UserService;
+import model.services.service.UserService;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.Optional;
 
 public class AuthenticateUserCommand implements Command {
@@ -22,7 +23,7 @@ public class AuthenticateUserCommand implements Command {
 	
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+			throws ServletException, IOException, SQLException {
 		String pageToGo = "/index.jsp";
 		String email = request.getParameter(PARAM_LOGIN);
 		String password = request.getParameter(PARAM_PASSWORD);

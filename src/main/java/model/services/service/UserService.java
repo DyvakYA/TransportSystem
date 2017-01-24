@@ -1,15 +1,17 @@
-package model.services;
+package model.services.service;
 
 import model.dao.DaoConnection;
 import model.dao.DaoFactory;
 import model.dao.UserDao;
 import model.entities.User;
+import model.services.UserServiceable;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
 
-public class UserService {
+public class UserService implements UserServiceable{
 
 	private DaoFactory daoFactory = DaoFactory.getInstance();
 
@@ -21,7 +23,7 @@ public class UserService {
 		return Holder.INSTANCE;
 	}
 
-	public Optional<User> login(String name, String password) {
+	public Optional<User> login(String name, String password) throws SQLException {
 		try (DaoConnection connection = daoFactory.getConnection()) {
 			connection.begin();
 			UserDao userDao = daoFactory.createUserDao(connection);
@@ -31,12 +33,26 @@ public class UserService {
 		}
 	}
 
-	public List<User> getAllUsers() {
+	public List<Optional<User>> getAll() throws SQLException {
 		try (DaoConnection connection = daoFactory.getConnection()) {
 			connection.begin();
 			UserDao userDao = daoFactory.createUserDao(connection);
-			//DaoFactory.getInstance()
 			return userDao.findAll();
 		}
+	}
+
+	@Override
+	public void create(User user) {
+
+	}
+
+	@Override
+	public void update(User user, int id) {
+
+	}
+
+	@Override
+	public void delete(int id) {
+
 	}
 }

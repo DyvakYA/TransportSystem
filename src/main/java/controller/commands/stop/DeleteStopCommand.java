@@ -2,12 +2,13 @@ package controller.commands.stop;
 
 import controller.commands.validators.stop.DeleteStopCommandValidator;
 import model.extras.Localization;
-import model.services.StopService;
+import model.services.service.StopService;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.SQLException;
 
 public class DeleteStopCommand implements StopCommand {
 
@@ -15,16 +16,16 @@ public class DeleteStopCommand implements StopCommand {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, SQLException {
 
         if (!new DeleteStopCommandValidator().validate(request, response)) {
             return null;
         }
         int stopId = Integer.valueOf(request.getParameter(ID_ATTRIBUTE));
-        stopService.deleteStop(stopId);
+        stopService.delete(stopId);
         request.setAttribute(RESULT_ATTRIBUTE, Localization.getInstanse()
             .getLocalizedMessage(request, DELETE_STOP_SUCCESSFUL_MSG));
-        request.setAttribute(STOP_LIST_ATTRIBUTE, stopService.getAllStops());
+        request.setAttribute(STOP_LIST_ATTRIBUTE, stopService.getAll());
         return "/WEB-INF/admin/stops.jspx";
 
     }

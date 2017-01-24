@@ -11,13 +11,41 @@ public class RouteStops {
 		super();
 	}
 
-    public RouteStops(Integer id, Integer routeId, Integer stop_id,
+    public RouteStops(Integer id, Integer routeId, Integer stopId,
 					  Integer number) {
 		super();
 		this.id = id;
 		this.routeId = routeId;
-		this.stopId = stop_id;
+		this.stopId = stopId;
 		this.number = number;
+	}
+
+	public static class Builder{
+		RouteStops instance = new RouteStops();
+
+		public Builder setId(int id) {
+			instance.id = id;
+			return this;
+		}
+
+		public Builder setRouteId(int routeId) {
+			instance.routeId = routeId;
+			return this;
+		}
+
+		public Builder setStopId(int stopId) {
+			instance.stopId = stopId;
+			return this;
+		}
+
+		public Builder setNumber(int number) {
+			instance.number = number;
+			return this;
+		}
+
+		public RouteStops build() {
+			return instance;
+		}
 	}
 
 	public Integer getId() {
@@ -32,7 +60,7 @@ public class RouteStops {
 		return routeId;
 	}
 
-	public void setRouteId(Integer routeId) {
+	public void setRouteId(int routeId) {
 		this.routeId = routeId;
 	}
 

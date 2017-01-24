@@ -30,6 +30,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -37,7 +38,8 @@ import java.util.Map;
 public class TransportServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	public static final String SERVLET_EXCEPTION = "ForwardRequestServletException";
+	private static final String SERVLET_EXCEPTION = "ForwardRequestServletException";
+	private static final String SQL_EXCEPTION = "SQLException";
 	public static final String LOGGER_NAME = "log4j";
     
 	private Map<String , Command> commands = new HashMap<>();
@@ -117,8 +119,9 @@ public class TransportServlet extends HttpServlet {
 		} catch (ServletException | IOException e) {
 			Logger logger = (Logger) request.getServletContext().getAttribute(LOGGER_NAME);
 			logger.error(Localization.getInstanse().getLocalizedErrorMsg(SERVLET_EXCEPTION), e);
+		} catch (SQLException e) {
+			Logger logger = (Logger) request.getServletContext().getAttribute(LOGGER_NAME);
+			logger.error(Localization.getInstanse().getLocalizedErrorMsg(SQL_EXCEPTION), e);
 		}
-
 	}
-
 }

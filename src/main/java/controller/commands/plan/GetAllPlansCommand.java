@@ -2,13 +2,15 @@ package controller.commands.plan;
 
 import controller.commands.Command;
 import model.entities.Plan;
-import model.services.PlanService;
+import model.services.service.PlanService;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Created by Dyvak on 21.01.2017.
@@ -19,8 +21,8 @@ public class GetAllPlansCommand implements Command {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        List<Plan> plans = planService.getAllPlans();
+            throws ServletException, IOException, SQLException {
+        List<Optional<Plan>> plans = planService.getAll();
         request.setAttribute("plansList", plans);
         return "/WEB-INF/admin/plans.jspx";
     }

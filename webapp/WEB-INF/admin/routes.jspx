@@ -61,13 +61,13 @@
 
     <select name="command">
         <option value="createRoute"><fmt:message
-                key="CreateRouteCommand" /></option>
+                key="CreateCommand" /></option>
         <option value="updateRoute"><fmt:message
-                key="UpdateRouteCommand" /></option>
+                key="UpdateCommand" /></option>
         <option value="deleteRoute"><fmt:message
-                key="DeleteRouteCommand" /></option>
+                key="DeleteCommand" /></option>
         <option value="getAllRoutes"><fmt:message
-                key="GetAllRoutesCommand" /></option>
+                key="GetAllCommand" /></option>
     </select>
     <button class="my_link_smal" type="submit">
         <fmt:message key="ExecuteCommand" />

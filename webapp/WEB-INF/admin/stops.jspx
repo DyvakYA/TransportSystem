@@ -64,14 +64,14 @@
     </table>
 
     <select name="command">
-        <option value="${CREATE_TRANSPORT_COMMAND}"><fmt:message
-                key="CreateStopCommand" /></option>
-        <option value="${UPDATE_TRANSPORT_COMMAND}"><fmt:message
-                key="UpdateStopCommand" /></option>
-        <option value="${DELETE_TRANSPORT_COMMAND}"><fmt:message
-                key="DeleteStopCommand" /></option>
-        <option value="${FIND_ALL_TRANSPORT_COMMAND }"><fmt:message
-                key="GetAllStopsCommand" /></option>
+        <option value="createStop"><fmt:message
+                key="CreateCommand" /></option>
+        <option value="updateStop"><fmt:message
+                key="UpdateCommand" /></option>
+        <option value="deleteStop"><fmt:message
+                key="DeleteCommand" /></option>
+        <option value="getAllStops"><fmt:message
+                key="GetAllCommand" /></option>
     </select>
     <button class="my_link_smal" type="submit">
         <fmt:message key="ExecuteCommand" />

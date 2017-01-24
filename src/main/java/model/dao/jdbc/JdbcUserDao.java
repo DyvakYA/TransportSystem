@@ -45,26 +45,15 @@ public class JdbcUserDao implements UserDao {
     }
 
     @Override
-    public User findById(int id) {
-
-        User user = null;
-
+    public Optional<User> findById(int id) {
+        Optional<User> user = Optional.empty();
         try (PreparedStatement statement = connection
                 .prepareStatement(SELECT_FROM_USERS_WHERE_USER_ID)) {
-
             statement.setInt(1, id);
-
             ResultSet result = statement.executeQuery();
-
             if (result.next()) {
-                user = new User(result.getInt(1),
-                        result.getString(2),
-                        result.getString(3),
-                        result.getString(4),
-                        result.getInt(5),
-                        UserRoles.valueOf(result.getString(6).toUpperCase()));
+                user = Optional.of(getUserFromResultSet(result));
             }
-
         } catch (SQLException e) {
             Logger logger = LoggerHelper.getInstance().getLogger();
             logger.error(Localization.getInstanse().getLocalizedErrorMsg(SQL_EXCEPTION), e);
@@ -73,131 +62,79 @@ public class JdbcUserDao implements UserDao {
     }
 
     @Override
-    public List<User> findAll() {
-
-        List<User> users = new ArrayList<>();
-
-        try (PreparedStatement statement = connection
-            .prepareStatement(SELECT_FROM_USERS)) {
-
-            ResultSet result = statement.executeQuery();
-
-            while (result.next()) {
-                users.add(new User(result.getInt(1),
-                        result.getString(2),
-                        result.getString(3),
-                        result.getString(4),
-                        result.getInt(5),
-                        UserRoles.valueOf(result.getString(6).toUpperCase())));
-            }
-        } catch (SQLException e) {
-            Logger logger = LoggerHelper.getInstance().getLogger();
-            logger.error(Localization.getInstanse().getLocalizedErrorMsg(SQL_EXCEPTION), e);
+    public List<Optional<User>> findAll() throws SQLException {
+        List<Optional<User>> users = new ArrayList<>();
+        PreparedStatement statement = connection
+                .prepareStatement(SELECT_FROM_USERS);
+        ResultSet result = statement.executeQuery();
+        while (result.next()) {
+            users.add(Optional.of(getUserFromResultSet(result)));
         }
         return users;
     }
 
     @Override
-    public void create(User user) {
-
-        try( PreparedStatement query =
-                     connection.prepareStatement(CREATE_USER_QUERY
-                             , Statement.RETURN_GENERATED_KEYS ) ){
-            query.setString( 1 , user.getName());
-            query.setString( 2 , user.getSurname());
-            query.setString( 3 , user.getEmail());
-            query.setInt(4, user.getPasswordHash());
-            query.setString( 5 , String.valueOf(user.getRole()));
-            query.executeUpdate();
-            ResultSet keys =  query.getGeneratedKeys();
-            if( keys.next()){
-                user.setId( keys.getInt(1) );
-            }
-        } catch (SQLException e) {
-            Logger logger = LoggerHelper.getInstance().getLogger();
-            logger.error(Localization.getInstanse().getLocalizedErrorMsg(SQL_EXCEPTION), e);
+    public void create(User user) throws SQLException {
+        PreparedStatement query = connection
+                .prepareStatement(CREATE_USER_QUERY, Statement.RETURN_GENERATED_KEYS );
+        query.setString( 1 , user.getName());
+        query.setString( 2 , user.getSurname());
+        query.setString( 3 , user.getEmail());
+        query.setInt(4, user.getPasswordHash());
+        query.setString( 5 , String.valueOf(user.getRole()));
+        query.executeUpdate();
+        ResultSet keys =  query.getGeneratedKeys();
+        if( keys.next()){
+            user.setId( keys.getInt(1) );
         }
     }
 
     @Override
-    public void update(User user, int id) {
-
-        try( PreparedStatement query =
-                     connection.prepareStatement(UPDATE_USER_QUERY
-                             , Statement.RETURN_GENERATED_KEYS ) ){
-            query.setString( 1 , user.getName());
-            query.setString( 2 , user.getSurname());
-            query.setString( 3 , user.getEmail());
-            query.setInt(4, user.getPasswordHash());
-            query.setString( 5 , String.valueOf(user.getRole()));
-            query.setInt(6, id);
-
-            query.executeUpdate();
-            ResultSet keys =  query.getGeneratedKeys();
-            if( keys.next()){
-                user.setId( keys.getInt(1) );
-            }
-        } catch (SQLException e) {
-            Logger logger = LoggerHelper.getInstance().getLogger();
-            logger.error(Localization.getInstanse().getLocalizedErrorMsg(SQL_EXCEPTION), e);
+    public void update(User user, int id) throws SQLException {
+        PreparedStatement query = connection
+                .prepareStatement(UPDATE_USER_QUERY, Statement.RETURN_GENERATED_KEYS);
+        query.setString( 1 , user.getName());
+        query.setString( 2 , user.getSurname());
+        query.setString( 3 , user.getEmail());
+        query.setInt(4, user.getPasswordHash());
+        query.setString( 5 , String.valueOf(user.getRole()));
+        query.setInt(6, id);
+        query.executeUpdate();
+        ResultSet keys =  query.getGeneratedKeys();
+        if( keys.next()){
+            user.setId( keys.getInt(1) );
         }
     }
 
     @Override
-    public void delete(int id) {
-
-        try (PreparedStatement statement = connection
-                .prepareStatement(DELETE_USER_QUERY)) {
-
-            statement.setInt(1, id);
-            statement.executeUpdate();
-
-        } catch (SQLException e) {
-            Logger logger = LoggerHelper.getInstance().getLogger();
-            logger.error(Localization.getInstanse().getLocalizedErrorMsg(SQL_EXCEPTION), e);
-        }
+    public void delete(int id) throws SQLException {
+        PreparedStatement statement = connection.prepareStatement(DELETE_USER_QUERY);
+        statement.setInt(1, id);
+        statement.executeUpdate();
     }
 
     @Override
-    public Optional<User> findByName(String name) {
-
+    public Optional<User> findByName(String name) throws SQLException {
         Optional<User> user = Optional.empty();
-
-        try (PreparedStatement statement = connection
-            .prepareStatement(SELECT_FROM_USERS_WHERE_LOGIN)) {
-            statement.setString(1, name);
-            ResultSet result = statement.executeQuery();
-            if (result.next()) {
-                User getUser = getUserFromResultSet(result);
-                user = Optional.of(getUser);
-            }
-
-        } catch (SQLException e) {
-            Logger logger = LoggerHelper.getInstance().getLogger();
-            logger.error(Localization.getInstanse().getLocalizedErrorMsg(SQL_EXCEPTION), e);
+        PreparedStatement statement = connection.prepareStatement(SELECT_FROM_USERS_WHERE_NAME);
+        statement.setString(1, name);
+        ResultSet result = statement.executeQuery();
+        if (result.next()) {
+            user = Optional.of(getUserFromResultSet(result));
         }
         return user;
     }
 
     @Override
-    public Optional<User> getUserByEmail(String email) {
-
-        Optional<User> result = Optional.empty();
-
-        try (PreparedStatement statement =
-             connection.prepareStatement(SELECT_USER_BY_EMAIL)) {
-             statement.setString(1, email.toLowerCase());
-             ResultSet rs = statement.executeQuery();
-             if (rs.next()) {
-                 User user = getUserFromResultSet(rs);
-                 result = Optional.of(user);
-
-             }
-        } catch (SQLException e) {
-            Logger logger = LoggerHelper.getInstance().getLogger();
-            logger.error(Localization.getInstanse().getLocalizedErrorMsg(SQL_EXCEPTION), e);
+    public Optional<User> getUserByEmail(String email) throws SQLException {
+        Optional<User> user = Optional.empty();
+        PreparedStatement statement = connection.prepareStatement(SELECT_USER_BY_EMAIL);
+        statement.setString(1, email.toLowerCase());
+        ResultSet result = statement.executeQuery();
+        if (result.next()) {
+            user = Optional.of(getUserFromResultSet(result));
         }
-        return result;
+        return user;
     }
 
     private User getUserFromResultSet(ResultSet rs) throws SQLException {

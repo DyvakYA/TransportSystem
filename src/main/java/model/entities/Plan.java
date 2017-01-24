@@ -28,6 +28,11 @@ public class Plan {
 	public static class Builder{
 		Plan instance = new Plan();
 
+		public Builder setId(Integer id) {
+			instance.id = id;
+			return this;
+		}
+
 		public Builder setRouteId(Integer routeId) {
 			instance.routeId = routeId;
 			return this;

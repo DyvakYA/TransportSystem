@@ -5,12 +5,13 @@ import controller.commands.validators.transport.UpdateTransportCommandValidator;
 import model.extras.Localization;
 import model.entities.Transport;
 import model.entities.enums.TransportType;
-import model.services.TransportService;
+import model.services.service.TransportService;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.SQLException;
 
 public class UpdateTransportCommand implements TransportCommand {
 
@@ -18,7 +19,7 @@ public class UpdateTransportCommand implements TransportCommand {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, SQLException {
 
         if (!new UpdateTransportCommandValidator().validate(request, response)) {
             return null;
@@ -27,10 +28,10 @@ public class UpdateTransportCommand implements TransportCommand {
                 TransportType.valueOf(request.getParameter(TYPE_ATTRIBUTE).toUpperCase()),
                 request.getParameter(MODEL_ATTRIBUTE),
                 String.valueOf(request.getParameter(NUMBER_ATTRIBUTE)));
-        transportService.updateTransport(transport, transport.getId());
+        transportService.update(transport, transport.getId());
         request.setAttribute(Command.RESULT_ATTRIBUTE, Localization.getInstanse()
                 .getLocalizedMessage(request, UPDATE_TRANSPORT_SUCCESSFUL_MSG));
-        request.setAttribute(TRANSPORT_LIST_ATTRIBUTE, transportService.getAllTransports());
+        request.setAttribute(TRANSPORT_LIST_ATTRIBUTE, transportService.getAll());
         return "/WEB-INF/admin/transports.jspx";
     }
 }

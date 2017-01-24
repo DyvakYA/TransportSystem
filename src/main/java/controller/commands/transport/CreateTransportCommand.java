@@ -4,12 +4,13 @@ import controller.commands.validators.transport.CreateTransportCommandValidator;
 import model.entities.Transport;
 import model.entities.enums.TransportType;
 import model.extras.Localization;
-import model.services.TransportService;
+import model.services.service.TransportService;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.SQLException;
 
 public class CreateTransportCommand implements TransportCommand {
 
@@ -17,7 +18,7 @@ public class CreateTransportCommand implements TransportCommand {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, SQLException {
 
         if (!new CreateTransportCommandValidator().validate(request, response)) {
             return null;
@@ -26,10 +27,10 @@ public class CreateTransportCommand implements TransportCommand {
                 TransportType.valueOf(request.getParameter(TYPE_ATTRIBUTE).toUpperCase()),
                 request.getParameter(MODEL_ATTRIBUTE),
                 request.getParameter(NUMBER_ATTRIBUTE));
-        transportService.createTransport(transport);
+        transportService.create(transport);
         request.setAttribute(RESULT_ATTRIBUTE, Localization.getInstanse()
                 .getLocalizedMessage(request, CREATE_TRANSPORT_SUCCESSFUL_MSG));
-        request.setAttribute(TRANSPORT_LIST_ATTRIBUTE, transportService.getAllTransports());
+        request.setAttribute(TRANSPORT_LIST_ATTRIBUTE, transportService.getAll());
         return "/WEB-INF/admin/transports.jspx";
     }
 }

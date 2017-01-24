@@ -1,16 +1,19 @@
-package model.services;
+package model.services.service;
 
 import model.dao.DaoConnection;
 import model.dao.DaoFactory;
 import model.dao.DriverDao;
 import model.entities.Driver;
+import model.services.DriverServiceable;
 
+import java.sql.SQLException;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Created by Dyvak on 21.01.2017.
  */
-public class DriverService {
+public class DriverService implements DriverServiceable {
 
     private DaoFactory daoFactory = DaoFactory.getInstance();
 
@@ -22,36 +25,37 @@ public class DriverService {
         return Holder.INSTANCE;
     }
 
-    public List<Driver> getAllDrivers() {
+    public List<Optional<Driver>> getAll() throws SQLException {
         try (DaoConnection connection = daoFactory.getConnection()) {
-            connection.begin();
             DriverDao driverDao = daoFactory.createDriverDao(connection);
             return driverDao.findAll();
         }
     }
 
-    public void createDriver(Driver driver) {
+    public void create(Driver driver) throws SQLException {
         try (DaoConnection connection = daoFactory.getConnection()) {
             connection.begin();
             DriverDao transportDao = daoFactory.createDriverDao(connection);
-
             transportDao.create(driver);
+            connection.commit();
         }
     }
 
-    public void updateDriver(Driver driver,int id) {
+    public void update(Driver driver,int id) throws SQLException {
         try (DaoConnection connection = daoFactory.getConnection()) {
             connection.begin();
             DriverDao driverDao = daoFactory.createDriverDao(connection);
             driverDao.update(driver, id);
+            connection.commit();
         }
     }
 
-    public void deleteDriver(int id) {
+    public void delete(int id) throws SQLException {
         try (DaoConnection connection = daoFactory.getConnection()) {
             connection.begin();
             DriverDao driverDao = daoFactory.createDriverDao(connection);
             driverDao.delete(id);
+            connection.commit();
         }
     }
 }

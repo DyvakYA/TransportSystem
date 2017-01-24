@@ -22,6 +22,11 @@ public class Route {
 	public static class Builder{
 		Route instance = new Route();
 
+		public Builder setId(int id) {
+			instance.id = id;
+			return this;
+		}
+
 		public Builder setName(String name) {
 			instance.name = name;
 			return this;

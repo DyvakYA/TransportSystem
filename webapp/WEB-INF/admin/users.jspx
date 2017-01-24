@@ -77,7 +77,7 @@
 
     <select name="command">
         <option value="getAllUsers"><fmt:message
-                key="GetAllUsersCommand" /></option>
+                key="GetAllCommand" /></option>
 
     </select>
     <button class="my_link_smal" type="submit">

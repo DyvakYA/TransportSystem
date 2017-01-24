@@ -4,6 +4,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.SQLException;
 
 /**
  * Created by Dyvak on 21.01.2017.
@@ -20,5 +21,5 @@ public interface Command {
 
     String execute(HttpServletRequest request,
                    HttpServletResponse response)
-            throws ServletException, IOException;
+            throws ServletException, IOException, SQLException;
 }

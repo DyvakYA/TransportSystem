@@ -3,13 +3,11 @@ package model.dao.jdbc;
 import model.dao.RouteStopsDao;
 import model.entities.Route;
 import model.entities.RouteStops;
-import model.extras.Localization;
-import model.extras.LoggerHelper;
-import org.apache.log4j.Logger;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class JdbcRouteStopsDao implements RouteStopsDao {
 
@@ -37,132 +35,86 @@ public class JdbcRouteStopsDao implements RouteStopsDao {
     }
 
     @Override
-    public RouteStops findById(int id) {
-
-        RouteStops routeStops = null;
-
-        try (PreparedStatement statement = connection
-                .prepareStatement(SELECT_FROM_ROUTE_STOPS_WHERE_USER_ID)) {
-
-            statement.setInt(1, id);
-
-            ResultSet result = statement.executeQuery();
-
-            if (result.next()) {
-                routeStops = new RouteStops(result.getInt(1),
-                        result.getInt(2),
-                        result.getInt(3),
-                        result.getInt(4));
-            }
-
-        } catch (SQLException e) {
-            Logger logger = LoggerHelper.getInstance().getLogger();
-            logger.error(Localization.getInstanse().getLocalizedErrorMsg(SQL_EXCEPTION), e);
+    public Optional<RouteStops> findById(int id) throws SQLException {
+        Optional<RouteStops> routeStops = Optional.empty();
+        PreparedStatement statement = connection
+                .prepareStatement(SELECT_FROM_ROUTE_STOPS_WHERE_USER_ID);
+        statement.setInt(1, id);
+        ResultSet result = statement.executeQuery();
+        if (result.next()) {
+            routeStops = Optional.of(getRouteStopsFromResultSet(result));
         }
         return routeStops;
     }
 
     @Override
-    public List<RouteStops> findAll() {
-
-        List<RouteStops> routeStops = new ArrayList<>();
-
-        try (PreparedStatement statement = connection
-                .prepareStatement(SELECT_FROM_ROUTE_STOPS)) {
-
-            ResultSet result = statement.executeQuery();
-
-            while (result.next()) {
-                routeStops.add(new RouteStops(result.getInt(1),
-                        result.getInt(2),
-                        result.getInt(3),
-                        result.getInt(4)));
-            }
-        } catch (SQLException e) {
-            Logger logger = LoggerHelper.getInstance().getLogger();
-            logger.error(Localization.getInstanse().getLocalizedErrorMsg(SQL_EXCEPTION), e);
+    public List<Optional<RouteStops>> findAll() throws SQLException {
+        List<Optional<RouteStops>> routeStops = new ArrayList<>();
+        PreparedStatement statement = connection
+                .prepareStatement(SELECT_FROM_ROUTE_STOPS);
+        ResultSet result = statement.executeQuery();
+        while (result.next()) {
+            routeStops.add(Optional.of(getRouteStopsFromResultSet(result)));
         }
         return routeStops;
     }
 
     @Override
-    public void create(RouteStops routeStops) {
-
-        try( PreparedStatement query =
-                     connection.prepareStatement(CREATE_ROUTE_STOPS_QUERY
-                             , Statement.RETURN_GENERATED_KEYS ) ){
-            query.setInt(1, routeStops.getRouteId());
-            query.setInt(2, routeStops.getStopId());
-            query.setInt( 3 , routeStops.getNumber());
-            query.executeUpdate();
-            ResultSet keys =  query.getGeneratedKeys();
-            if( keys.next()){
-                routeStops.setId( keys.getInt(1) );
-            }
-        } catch (SQLException e) {
-            Logger logger = LoggerHelper.getInstance().getLogger();
-            logger.error(Localization.getInstanse().getLocalizedErrorMsg(SQL_EXCEPTION), e);
+    public void create(RouteStops routeStops) throws SQLException {
+        PreparedStatement query = connection
+                .prepareStatement(CREATE_ROUTE_STOPS_QUERY, Statement.RETURN_GENERATED_KEYS );
+        query.setInt(1, routeStops.getRouteId());
+        query.setInt(2, routeStops.getStopId());
+        query.setInt(3 , routeStops.getNumber());
+        query.executeUpdate();
+        ResultSet keys =  query.getGeneratedKeys();
+        if( keys.next()){
+            routeStops.setId( keys.getInt(1) );
         }
     }
 
     @Override
-    public void update(RouteStops routeStops, int id) {
-
-        try( PreparedStatement query =
-                     connection.prepareStatement(UPDATE_ROUTE_STOPS_QUERY
-                             , Statement.RETURN_GENERATED_KEYS ) ){
-            query.setInt(1, routeStops.getRouteId());
-            query.setInt(2, routeStops.getStopId());
-            query.setInt(3, routeStops.getNumber());
-
-            query.setInt(4, id);
-
-            query.executeUpdate();
-            ResultSet keys =  query.getGeneratedKeys();
-            if( keys.next()){
-                routeStops.setId( keys.getInt(1) );
-            }
-        } catch (SQLException e) {
-            Logger logger = LoggerHelper.getInstance().getLogger();
-            logger.error(Localization.getInstanse().getLocalizedErrorMsg(SQL_EXCEPTION), e);
+    public void update(RouteStops routeStops, int id) throws SQLException {
+        PreparedStatement query = connection
+                .prepareStatement(UPDATE_ROUTE_STOPS_QUERY, Statement.RETURN_GENERATED_KEYS);
+        query.setInt(1, routeStops.getRouteId());
+        query.setInt(2, routeStops.getStopId());
+        query.setInt(3, routeStops.getNumber());
+        query.setInt(4, id);
+        query.executeUpdate();
+        ResultSet keys =  query.getGeneratedKeys();
+        if( keys.next()){
+            routeStops.setId( keys.getInt(1) );
         }
     }
 
     @Override
-    public void delete(int id) {
-        try (PreparedStatement statement = connection
-                .prepareStatement(DELETE_ROUTE_STOPS_QUERY)) {
-
-            statement.setInt(1, id);
-            statement.executeUpdate();
-
-        } catch (SQLException e) {
-            Logger logger = LoggerHelper.getInstance().getLogger();
-            logger.error(Localization.getInstanse().getLocalizedErrorMsg(SQL_EXCEPTION), e);
-        }
-
+    public void delete(int id) throws SQLException {
+        PreparedStatement statement = connection
+                .prepareStatement(DELETE_ROUTE_STOPS_QUERY);
+        statement.setInt(1, id);
+        statement.executeUpdate();
     }
 
     @Override
-    public List<RouteStops> findByRoute(Route route) {
-
-        List<RouteStops> routeStops = new ArrayList<>();
-
-        try (PreparedStatement statement = connection
-                .prepareStatement(SELECT_ROUTE_STOPS_BY_ROUTE_QUERY)) {
-
-            statement.setInt(1, route.getId());
-
-            ResultSet result = statement.executeQuery();
-
-            while (result.next()) {
-                routeStops.add(new RouteStops(result.getInt(1), result.getInt(2),
-                        result.getInt(3), result.getInt(4)));
-            }
-        } catch (SQLException e) {
-            Logger logger = LoggerHelper.getInstance().getLogger();
-            logger.error(Localization.getInstanse().getLocalizedErrorMsg(SQL_EXCEPTION), e);
+    public List<Optional<RouteStops>> findByRoute(Route route) throws SQLException {
+        List<Optional<RouteStops>> routeStops = new ArrayList<>();
+        PreparedStatement statement = connection.prepareStatement(SELECT_ROUTE_STOPS_BY_ROUTE_QUERY);
+        statement.setInt(1, route.getId());
+        ResultSet result = statement.executeQuery();
+        while (result.next()) {
+            routeStops.add(Optional.of(getRouteStopsFromResultSet(result)));
         }
+        return routeStops;
+    }
+
+    private RouteStops getRouteStopsFromResultSet(ResultSet rs) throws SQLException {
+        RouteStops routeStops = new RouteStops.Builder()
+                .setId(rs.getInt("routStops_id"))
+                .setRouteId(rs.getInt("routeId"))
+                .setStopId(rs.getInt("stopId"))
+                .setNumber(rs.getInt("number"))
+                .build();
         return routeStops;
     }
 }

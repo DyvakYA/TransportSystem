@@ -25,6 +25,11 @@ public class Stop {
 	public static class Builder{
 		Stop instance = new Stop();
 
+		public Builder setId(int id) {
+			instance.id = id;
+			return this;
+		}
+
 		public Builder setName(String name) {
 			instance.name = name;
 			return this;

@@ -53,9 +53,9 @@
             <td><fmt:message key="TransportId" /></td>
         </tr>
         <tr>
-            <td><input type="text" name="${ID_ATTRIBUTE }"></input></td>
-            <td><input type="text" name="${ROUTE_ID_ATTRIBUTE }"></input></td>
-            <td><input type="text" name="${TRANSPORT_ID_ATTRIBUTE }"></input></td>
+            <td><input type="text" name="plan_id"></input></td>
+            <td><input type="text" name="route_id"></input></td>
+            <td><input type="text" name="transport_id"></input></td>
         </tr>
         <tr>
             <td colspan="3"></td>
@@ -63,14 +63,14 @@
     </table>
 
     <select name="command">
-        <option value="${CREATE_TRANSPORT_COMMAND}"><fmt:message
-                key="CreatePlanCommand" /></option>
-        <option value="${UPDATE_TRANSPORT_COMMAND}"><fmt:message
-                key="UpdatePlanCommand" /></option>
-        <option value="${DELETE_TRANSPORT_COMMAND}"><fmt:message
-                key="DeletePlanCommand" /></option>
-        <option value="${FIND_ALL_TRANSPORT_COMMAND }"><fmt:message
-                key="GetAllPlansCommand" /></option>
+        <option value="createTransport"><fmt:message
+                key="CreateCommand" /></option>
+        <option value="updateTransport"><fmt:message
+                key="UpdateCommand" /></option>
+        <option value="deleteTransport"><fmt:message
+                key="DeleteCommand" /></option>
+        <option value="getAllTransport"><fmt:message
+                key="GetAllCommand" /></option>
     </select>
     <button class="my_link_smal" type="submit">
         <fmt:message key="ExecuteCommand" />

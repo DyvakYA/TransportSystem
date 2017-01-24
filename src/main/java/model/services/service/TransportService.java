@@ -1,16 +1,19 @@
-package model.services;
+package model.services.service;
 
 import model.dao.DaoConnection;
 import model.dao.DaoFactory;
 import model.dao.TransportDao;
 import model.entities.Transport;
+import model.services.TransportServiceable;
 
+import java.sql.SQLException;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Created by Dyvak on 21.01.2017.
  */
-public class TransportService {
+public class TransportService implements TransportServiceable{
 
     private DaoFactory daoFactory = DaoFactory.getInstance();
 
@@ -22,7 +25,7 @@ public class TransportService {
         return Holder.INSTANCE;
     }
 
-    public List<Transport> getAllTransports() {
+    public List<Optional<Transport>> getAll() throws SQLException {
         try (DaoConnection connection = daoFactory.getConnection()) {
             connection.begin();
             TransportDao transportDao = daoFactory.createTransportDao(connection);
@@ -30,27 +33,30 @@ public class TransportService {
         }
     }
 
-    public void createTransport(Transport transport) {
+    public void create(Transport transport) throws SQLException {
         try (DaoConnection connection = daoFactory.getConnection()) {
             connection.begin();
             TransportDao transportDao = daoFactory.createTransportDao(connection);
             transportDao.create(transport);
+            connection.commit();
         }
     }
 
-    public void updateTransport(Transport transport,int id) {
+    public void update(Transport transport,int id) throws SQLException {
         try (DaoConnection connection = daoFactory.getConnection()) {
             connection.begin();
             TransportDao transportDao = daoFactory.createTransportDao(connection);
             transportDao.update(transport, id);
+            connection.commit();
         }
     }
 
-    public void deleteTransport(int id) {
+    public void delete(int id) throws SQLException {
         try (DaoConnection connection = daoFactory.getConnection()) {
             connection.begin();
             TransportDao transportDao = daoFactory.createTransportDao(connection);
             transportDao.delete(id);
+            connection.commit();
         }
     }
 

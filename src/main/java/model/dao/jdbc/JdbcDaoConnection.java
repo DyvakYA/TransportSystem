@@ -10,9 +10,22 @@ public class JdbcDaoConnection implements DaoConnection {
 	private Connection connection;
 	private boolean inTransaction = false;
 
+
 	JdbcDaoConnection(Connection connection) {
 		super();
 		this.connection = connection;
+
+	}
+
+	@Override
+	public void begin() {
+		try {
+			connection.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
+			connection.setAutoCommit(false);
+			inTransaction = true;
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
 	}
 
 	@Override
@@ -22,16 +35,6 @@ public class JdbcDaoConnection implements DaoConnection {
 		}
 		try {
 			connection.close();
-		} catch (SQLException e) {
-			throw new RuntimeException(e);
-		}
-	}
-
-	@Override
-	public void begin() {
-		try {
-			connection.setAutoCommit(false);
-			inTransaction = true;
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}

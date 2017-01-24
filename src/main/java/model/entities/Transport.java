@@ -32,6 +32,11 @@ public class Transport {
 	public static class Builder{
 		Transport instance = new Transport();
 
+		public Builder setId(int id) {
+			instance.id = id;
+			return this;
+		}
+
 		public Builder setType(TransportType type) {
 			instance.type = type;
 			return this;

@@ -71,13 +71,13 @@
 
     <select name="command">
         <option value="createDriver"><fmt:message
-                key="CreateDriverCommand" /></option>
+                key="CreateCommand" /></option>
         <option value="updateDriver"><fmt:message
-                key="UpdateDriverCommand" /></option>
+                key="UpdateCommand" /></option>
         <option value="deleteDriver"><fmt:message
-                key="DeleteDriverCommand" /></option>
+                key="DeleteCommand" /></option>
         <option value="getAllDrivers"><fmt:message
-                key="GetAllDriversCommand" /></option>
+                key="GetAllCommand" /></option>
     </select>
     <button class="my_link_smal" type="submit">
         <fmt:message key="ExecuteCommand" />

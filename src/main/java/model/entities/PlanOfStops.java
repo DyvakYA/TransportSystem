@@ -25,6 +25,11 @@ public class PlanOfStops {
 	public static class Builder{
 		PlanOfStops instance = new PlanOfStops();
 
+		public Builder setId(Integer id) {
+			instance.id = id;
+			return this;
+		}
+
 		public Builder setStopId(Integer stopId) {
 			instance.stopId = stopId;
 			return this;
