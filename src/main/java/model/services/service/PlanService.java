@@ -6,9 +6,7 @@ import model.dao.PlanDao;
 import model.entities.Plan;
 import model.services.PlanServiceable;
 
-import java.sql.SQLException;
 import java.util.List;
-import java.util.Optional;
 
 /**
  * Created by Dyvak on 21.01.2017.
@@ -25,7 +23,7 @@ public class PlanService implements PlanServiceable {
         return Holder.INSTANCE;
     }
 
-    public List<Optional<Plan>> getAll() throws SQLException {
+    public List<Plan> getAll() {
         try (DaoConnection connection = daoFactory.getConnection()) {
             connection.begin();
             PlanDao planDao = daoFactory.createPlanDao(connection);
@@ -33,7 +31,7 @@ public class PlanService implements PlanServiceable {
         }
     }
 
-    public void create(Plan plan) throws SQLException {
+    public void create(Plan plan) {
         try (DaoConnection connection = daoFactory.getConnection()) {
             connection.begin();
             PlanDao planDao = daoFactory.createPlanDao(connection);
@@ -43,7 +41,7 @@ public class PlanService implements PlanServiceable {
     }
 
     @Override
-    public void update(Plan plan, int id) throws SQLException {
+    public void update(Plan plan, int id)  {
         try (DaoConnection connection = daoFactory.getConnection()) {
             connection.begin();
             PlanDao planDao = daoFactory.createPlanDao(connection);
@@ -53,7 +51,7 @@ public class PlanService implements PlanServiceable {
 
     }
 
-    public void delete(int id) throws SQLException {
+    public void delete(int id) {
         try (DaoConnection connection = daoFactory.getConnection()) {
             connection.begin();
             PlanDao planDao = daoFactory.createPlanDao(connection);

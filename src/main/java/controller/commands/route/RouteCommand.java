@@ -22,15 +22,15 @@ public interface RouteCommand extends Command {
 
     String DESTINATION_PAGE = "./index.jsp";
 
-    String ADMIN_DESTINATION_PAGE = "./admin/past_route.jsp";
+    String ADMIN_DESTINATION_PAGE = "./admin/route.jsp";
 
-    String ROUTE_ID_ATTRIBUTE = "routeId";
+    String ROUTE_ID_ATTRIBUTE = "route_id";
 
     String ROUTE_NAME_ATTRIBUTE = "routeName";
 
     String STOP_ID_ATTRIBUTE = "stopId";
 
-    String STOP_LIST_ATTRIBUTE = "stopList";
+    String STOP_LIST_ATTRIBUTE = "stopsList";
 
     String STOP_TO_REMOVE_ATTRIBUTE = "stopToRemoveId";
 }

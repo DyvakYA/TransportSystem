@@ -1,21 +1,25 @@
 package controller.commands.user;
 
-import java.io.IOException;
-
+import controller.commands.Command;
+import controller.commands.validators.user.RegisterUserCommandValidator;
+import model.entities.User;
+import model.entities.enums.UserRoles;
+import model.extras.Localization;
+import model.services.service.UserService;
 import org.apache.log4j.Logger;
 
-import ua.kpi.epam.transport.commands.Command;
-import ua.kpi.epam.transport.commands.validators.user.RegisterUserCommandValidator;
-import ua.kpi.epam.transport.dao.DaoFactory;
-import ua.kpi.epam.transport.dao.UserDao;
-import ua.kpi.epam.transport.entities.User;
-import ua.kpi.epam.transport.entities.enums.UserRole;
-import ua.kpi.epam.transport.extras.LocalizationHelper;
-import static ua.kpi.epam.transport.servlets.TransportServlet.LOGGER_NAME;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.sql.SQLException;
+import java.util.Optional;
+
+import static controller.servlet.MainController.LOGGER_NAME;
 
 public class RegisterUserCommand implements Command {
 
-    public static final String LOGIN_ATTRIBUTE = "login";
+    public static final String EMAIL_ATTRIBUTE = "email";
 
     public static final String PASSWORD_ATTRIBUTE = "password";
 
@@ -34,43 +38,48 @@ public class RegisterUserCommand implements Command {
     private static final String REGISTER_USER_ERROR_MSG = "RegisterUserError";
     private static final String REGISTER_USER_SUCCESSFUL_MSG = "RegisterUserSuccessful";
 
+    private UserService userService = UserService.getInstance();
+
     @Override
-    public void execute(HttpServletRequest request, HttpServletResponse response) {
+    public String execute(HttpServletRequest request, HttpServletResponse response) throws SQLException {
 
         if (!new RegisterUserCommandValidator().validate(request, response)) {
-            return;
+
+            return String.valueOf(response);
         }
+        System.out.println("---------------------------");
 
-        UserDao userDao = DaoFactory.getInstance().createUserDao();
-
-        String login = request.getParameter(LOGIN_ATTRIBUTE);
-
+        String email = request.getParameter(EMAIL_ATTRIBUTE);
         String password = request.getParameter(PASSWORD_ATTRIBUTE);
 
-        if (userDao.findByLogin(login) == null) {
-            userDao.create(new User(
-                    login,
-                    request.getParameter(NAME_ATTRIBUTE),
-                    request.getParameter(SURNAME_ATTRIBUTE),
-                    password,
-                    UserRole.valueOf(request.getParameter(ROLE_ATTRIBUTE).toUpperCase())));
+        if (userService.getByEmail(email).equals(Optional.empty())) {
+            User user = new User.Builder()
+                    .setName(request.getParameter("name"))
+                    .setSurname(request.getParameter("surname"))
+                    .setEmail(request.getParameter("email"))
+                    .setPasswordHash(request.getParameter("password"))
+                    .setRole(UserRoles.USER)
+                    .build();
+            System.out.println(user);
+            userService.create(user);
 
             request.setAttribute(RESULT_ATTRIBUTE,
-                    LocalizationHelper.getInstanse().
-                    getLocalizedMessage(request, REGISTER_USER_SUCCESSFUL_MSG) + login);
+                    Localization.getInstanse().
+                    getLocalizedMessage(request, REGISTER_USER_SUCCESSFUL_MSG) + email);
 
         } else {
             request.setAttribute(RESULT_ATTRIBUTE,
-                    LocalizationHelper.getInstanse().
-                    getLocalizedMessage(request, REGISTER_USER_ERROR_MSG) + login);
+                    Localization.getInstanse().
+                    getLocalizedMessage(request, REGISTER_USER_ERROR_MSG) + email);
         }
         try {
             request.getRequestDispatcher(DESTINATION_PAGE).forward(request,
                     response);
         } catch (ServletException | IOException e) {
             Logger logger = (Logger) request.getServletContext().getAttribute(LOGGER_NAME);
-            logger.error(LocalizationHelper.getInstanse().getLocalizedErrorMsg(SERVLET_EXCEPTION), e);
+            logger.error(Localization.getInstanse().getLocalizedErrorMsg(SERVLET_EXCEPTION), e);
         }
+        return email;
     }
 
 }

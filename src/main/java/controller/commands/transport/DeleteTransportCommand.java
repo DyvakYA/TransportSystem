@@ -26,7 +26,7 @@ public class DeleteTransportCommand implements TransportCommand {
         request.setAttribute(RESULT_ATTRIBUTE, Localization.getInstanse()
                 .getLocalizedMessage(request, DELETE_TRANSPORT_SUCCESSFUL_MSG));
         request.setAttribute(TRANSPORT_LIST_ATTRIBUTE, transportService.getAll());
-        return "/WEB-INF/admin/transports.jspx";
+        return "/WEB-INF/admin/transports.jsp";
 
     }
 

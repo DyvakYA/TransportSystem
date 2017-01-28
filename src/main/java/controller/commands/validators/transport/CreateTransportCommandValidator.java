@@ -17,6 +17,6 @@ public class CreateTransportCommandValidator implements CommandValidator {
         String message = Localization.getInstanse().getLocalizedMessage(request, TRANSPORT_ERROR_MSG);
 
         return CommandValidatorHelper.getInstance().isEmptyValidate(new String[]{NUMBER_ATTRIBUTE, MODEL_ATTRIBUTE},
-                RESULT_ATTRIBUTE, ADMIN_DESTINATION_PAGE, message, request, response);
+                RESULT_ATTRIBUTE, DRIVER_DESTINATION_PAGE, message, request, response);
     }
 }

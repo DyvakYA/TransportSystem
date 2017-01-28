@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
-import java.util.Optional;
 
 /**
  * Created by Dyvak on 21.01.2017.
@@ -22,8 +21,8 @@ public class GetAllTransportsCommand implements TransportCommand {
     public String execute(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
 
-        List<Optional<Transport>> transports = transportService.getAll();
+        List<Transport> transports = transportService.getAll();
         request.setAttribute(TRANSPORT_LIST_ATTRIBUTE, transports);
-        return "/WEB-INF/admin/transports.jspx";
+        return "/WEB-INF/admin/transports.jsp";
     }
 }

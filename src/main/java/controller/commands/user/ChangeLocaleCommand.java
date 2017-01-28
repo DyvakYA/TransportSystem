@@ -12,7 +12,7 @@ import java.util.Locale;
 public class ChangeLocaleCommand implements Command {
 
     public static final String LOCALE_ATTRIBUTE = "userLocale";
-    private static final String DESTINATION_PAGE = "/authentication.jsp";
+    private static final String DESTINATION_PAGE = "./index.jsp";
     private static final String RU_COUNTRY = "RU";
     private static final String RU_LANGUAGE = "ru";
     private static final String US_COUNTRY = "US";
@@ -27,7 +27,6 @@ public class ChangeLocaleCommand implements Command {
         Locale locale = null;
 
         if (session == null) {
-
             session = request.getSession();
             session.setAttribute(LOCALE_ATTRIBUTE, changeLocale(request.getLocale()));
         } else if (session.getAttribute(LOCALE_ATTRIBUTE) == null) {
@@ -35,11 +34,8 @@ public class ChangeLocaleCommand implements Command {
         } else if (request.getSession(false) != null && session.getAttribute(LOCALE_ATTRIBUTE) != null) {
             session.setAttribute(LOCALE_ATTRIBUTE, changeLocale((Locale) session.getAttribute(LOCALE_ATTRIBUTE)));
         }
-
-
-            request.getRequestDispatcher(DESTINATION_PAGE).forward(request, response);
-
-        return null;
+        request.setAttribute(RESULT_ATTRIBUTE, LOCALE_ATTRIBUTE);
+        return "/WEB-INF/index.jsp";
     }
 
     private Locale changeLocale(Locale locale) {

@@ -23,7 +23,7 @@ public class DeletePlanCommand implements PlanCommand {
         request.setAttribute(Command.RESULT_ATTRIBUTE, Localization.getInstanse()
                 .getLocalizedMessage(request, DELETE_PLAN_SUCCESSFUL_MSG));
         request.setAttribute(PLAN_LIST_ATTRIBUTE, planService.getAll());
-        return "/WEB-INF/admin/plans.jspx";
+        return "/WEB-INF/admin/plans.jsp";
     }
 
 }

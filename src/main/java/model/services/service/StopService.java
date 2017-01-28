@@ -3,12 +3,11 @@ package model.services.service;
 import model.dao.DaoConnection;
 import model.dao.DaoFactory;
 import model.dao.StopDao;
+import model.entities.Route;
 import model.entities.Stop;
 import model.services.StopServiceable;
 
-import java.sql.SQLException;
 import java.util.List;
-import java.util.Optional;
 
 /**
  * Created by Dyvak on 21.01.2017.
@@ -25,7 +24,15 @@ public class StopService implements StopServiceable{
         return Holder.INSTANCE;
     }
 
-    public List<Optional<Stop>> getAll() throws SQLException {
+    public List<Stop> findAllStopsOnRoute(Route route) {
+        try (DaoConnection connection = daoFactory.getConnection()) {
+            connection.begin();
+            StopDao stopDao = daoFactory.createStopDao(connection);
+            return stopDao.findAllStopsOnRoute(route);
+        }
+    }
+
+    public List<Stop> getAll()  {
         try (DaoConnection connection = daoFactory.getConnection()) {
             connection.begin();
             StopDao stopDao = daoFactory.createStopDao(connection);
@@ -33,7 +40,7 @@ public class StopService implements StopServiceable{
         }
     }
 
-    public void create(Stop stop) throws SQLException {
+    public void create(Stop stop) {
         try (DaoConnection connection = daoFactory.getConnection()) {
             connection.begin();
             StopDao stopDao = daoFactory.createStopDao(connection);
@@ -42,7 +49,7 @@ public class StopService implements StopServiceable{
         }
     }
 
-    public void update(Stop route,int id) throws SQLException {
+    public void update(Stop route,int id)  {
         try (DaoConnection connection = daoFactory.getConnection()) {
             connection.begin();
             StopDao stopDao = daoFactory.createStopDao(connection);
@@ -50,7 +57,7 @@ public class StopService implements StopServiceable{
         }
     }
 
-    public void delete(int id) throws SQLException {
+    public void delete(int id)  {
         try (DaoConnection connection = daoFactory.getConnection()) {
             connection.begin();
             StopDao stopDao = daoFactory.createStopDao(connection);

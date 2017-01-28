@@ -48,36 +48,10 @@
             </c:forEach>
         </table>
 
-        <form method="post" action="./TransportServlet">
-            <table>
-                <tr>
-                    <td><fmt:message key="Id" /></td>
-                    <td><fmt:message key="Name" /></td>
-                </tr>
-                <tr>
-                    <td><input type="text" name="route_id"></td><br>
-                    <td><input type="text" name="name"></td><br>
-                </tr>
-                <tr>
-                    <td colspan="3"></td>
-                </tr>
-            </table>
-
-            <select name="command">
-                <option value="createTransport"><fmt:message key="CreateCommand" /></option>
-                <option value="updateTransport"><fmt:message key="UpdateCommand" /></option>
-                <option value="deleteTransport"><fmt:message key="DeleteCommand" /></option>
-                <option value="getAllTransport"><fmt:message key="GetAllCommand" /></option>
-            </select><br>
-            <button class="my_link_smal" type="submit">
-                <fmt:message key="ExecuteCommand" />
-            </button>
             <br />
             <div style="color: red;">
                 <c:out value="${result}" />
             </div>
-
-        </form>
 
     </div>
     <div id="footer">

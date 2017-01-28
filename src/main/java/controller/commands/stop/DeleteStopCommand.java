@@ -26,7 +26,7 @@ public class DeleteStopCommand implements StopCommand {
         request.setAttribute(RESULT_ATTRIBUTE, Localization.getInstanse()
             .getLocalizedMessage(request, DELETE_STOP_SUCCESSFUL_MSG));
         request.setAttribute(STOP_LIST_ATTRIBUTE, stopService.getAll());
-        return "/WEB-INF/admin/stops.jspx";
+        return "/WEB-INF/admin/stops.jsp";
 
     }
 

@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
-import java.util.Optional;
 
 /**
  * Created by Dyvak on 21.01.2017.
@@ -22,8 +21,8 @@ public class GetAllPlansCommand implements Command {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
-        List<Optional<Plan>> plans = planService.getAll();
+        List<Plan> plans = planService.getAll();
         request.setAttribute("plansList", plans);
-        return "/WEB-INF/admin/plans.jspx";
+        return "/WEB-INF/admin/plans.jsp";
     }
 }

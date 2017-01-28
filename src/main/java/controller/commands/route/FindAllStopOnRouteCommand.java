@@ -1,68 +1,58 @@
 package controller.commands.route;
 
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import model.entities.Route;
+import model.entities.Stop;
+import model.extras.Localization;
+import model.services.service.RouteService;
+import model.services.service.StopService;
+import org.apache.log4j.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.apache.log4j.Logger;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
-import ua.kpi.epam.transport.commands.route.RouteCommand;
-import ua.kpi.epam.transport.dao.DaoFactory;
-import ua.kpi.epam.transport.dao.RouteDao;
-import ua.kpi.epam.transport.dao.StopDao;
-import ua.kpi.epam.transport.dao.jdbc.JdbcDaoFactory;
-import ua.kpi.epam.transport.entities.Route;
-import ua.kpi.epam.transport.entities.Stop;
-import ua.kpi.epam.transport.extras.LocalizationHelper;
-import static ua.kpi.epam.transport.servlets.TransportServlet.LOGGER_NAME;
+import static controller.servlet.MainController.LOGGER_NAME;
 
-/**
- *
- * @author KIRIL
- */
 public class FindAllStopOnRouteCommand implements RouteCommand {
 
     private static final String SERVLET_EXCEPTION = "ForwardRequestServletException";
     private static final String FIND_ALL_STOP_ON_ROUTE_ERROR_MSG = "FindAllStopOnRouteError";
 
-    /**
-     *
-     * @param request
-     * @param response
-     */
+    private RouteService routeService = RouteService.getInstance();
+    private StopService stopService = StopService.getInstance();
+
     @Override
-    public void execute(HttpServletRequest request, HttpServletResponse response) {
+    public String execute(HttpServletRequest request, HttpServletResponse response) {
 
-        DaoFactory factory = JdbcDaoFactory.getInstance();
+        System.out.println("-----------------------------------------------");
 
-        StopDao stopDao = factory.createStopDao();
-        RouteDao routeDao = factory.createRouteDao();
+        Optional<Route> route = routeService.findById(Integer.parseInt(request.getParameter(ROUTE_ID_ATTRIBUTE)));
 
-        Route route = routeDao.find(Integer.parseInt(request
-                .getParameter(ROUTE_ID_ATTRIBUTE)));
-        if (route == null) {
-            request.setAttribute(RESULT_ATTRIBUTE, LocalizationHelper.getInstanse()
+        if (route.equals(Optional.empty())) {
+            request.setAttribute(RESULT_ATTRIBUTE, Localization.getInstanse()
                     .getLocalizedMessage(request, FIND_ALL_STOP_ON_ROUTE_ERROR_MSG));
         } else {
 
-            List<Stop> stopList = stopDao.findAllStopsOnRoute(route);
+            List<Stop> stopList = stopService.findAllStopsOnRoute(route.get());
             Map<Route, List<Stop>> resultMap = new HashMap<>();
-            resultMap.put(route, stopList);
+            resultMap.put(route.get(), stopList);
 
             request.setAttribute(RESULT_MAP_ATTRIBUTE, resultMap);
         }
 
         try {
-            request.setAttribute(STOP_LIST_ATTRIBUTE, DaoFactory.getInstance().createStopDao().findAll());
+            request.setAttribute(STOP_LIST_ATTRIBUTE, stopService.getAll());
 
             request.getRequestDispatcher(ADMIN_DESTINATION_PAGE).forward(request, response);
         } catch (ServletException | IOException e) {
             Logger logger = (Logger) request.getServletContext().getAttribute(LOGGER_NAME);
-            logger.error(LocalizationHelper.getInstanse().getLocalizedErrorMsg(SERVLET_EXCEPTION), e);
+            logger.error(Localization.getInstanse().getLocalizedErrorMsg(SERVLET_EXCEPTION), e);
         }
+        return "/WEB-INF/admin/routes.jsp";
     }
 }

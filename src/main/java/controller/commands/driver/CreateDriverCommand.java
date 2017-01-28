@@ -31,6 +31,6 @@ public class CreateDriverCommand implements DriverCommand {
         request.setAttribute(RESULT_ATTRIBUTE, Localization.getInstanse()
                 .getLocalizedMessage(request, CREATE_DRIVER_SUCCESSFUL_MSG));
         request.setAttribute(DRIVER_LIST_ATTRIBUTE, driverService.getAll());
-        return "/WEB-INF/admin/drivers.jspx";
+        return "/WEB-INF/admin/drivers.jsp";
     }
 }

@@ -20,7 +20,7 @@ public interface DriverCommand extends Command {
 
     String DRIVER_ID_ATTRIBUTE = "driver_id";
 
-    String ADMIN_DESTINATION_PAGE = "admin/drivers.jspx";
+    String ADMIN_DESTINATION_PAGE = "admin/drivers.jsp";
 
     String PLAN_ID_ATTRIBUTE = "planId";
 

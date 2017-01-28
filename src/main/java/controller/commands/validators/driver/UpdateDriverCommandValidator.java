@@ -17,9 +17,9 @@ public class UpdateDriverCommandValidator implements CommandValidator {
         String message = Localization.getInstanse().getLocalizedMessage(request, DRIVER_ERROR_MSG);
         
         return (CommandValidatorHelper.getInstance().isNullValidate(new String[]{ROUTE_ID_ATTRIBUTE},
-                RESULT_ATTRIBUTE, ADMIN_DESTINATION_PAGE, message, request, response)
+                RESULT_ATTRIBUTE, USER_DESTINATION_PAGE, message, request, response)
                 && CommandValidatorHelper.getInstance().isEmptyValidate(new String[]{ROUTE_NAME_ATTRIBUTE},
-                RESULT_ATTRIBUTE, ADMIN_DESTINATION_PAGE, message, request, response));
+                RESULT_ATTRIBUTE, USER_DESTINATION_PAGE, message, request, response));
     }
 
 }

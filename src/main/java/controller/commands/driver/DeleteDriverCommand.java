@@ -1,6 +1,6 @@
 package controller.commands.driver;
 
-import controller.commands.validators.route.DeleteRouteCommandValidator;
+import controller.commands.validators.driver.DeleteDriverCommandValidator;
 import model.extras.Localization;
 import model.services.service.DriverService;
 
@@ -17,7 +17,7 @@ public class DeleteDriverCommand implements DriverCommand {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
-        if (!new DeleteRouteCommandValidator().validate(request, response)) {
+        if (!new DeleteDriverCommandValidator().validate(request, response)) {
             return null;
         }
         int driverId = Integer.parseInt(request.getParameter(DRIVER_ID_ATTRIBUTE));
@@ -25,7 +25,7 @@ public class DeleteDriverCommand implements DriverCommand {
         request.setAttribute(RESULT_ATTRIBUTE, Localization.getInstanse()
                 .getLocalizedMessage(request, DELETE_DRIVER_SUCCESSFUL_MSG));
         request.setAttribute(DRIVER_LIST_ATTRIBUTE, driverService.getAll());
-        return "/WEB-INF/admin/drivers.jspx";
+        return "/WEB-INF/admin/drivers.jsp";
     }
 
 }

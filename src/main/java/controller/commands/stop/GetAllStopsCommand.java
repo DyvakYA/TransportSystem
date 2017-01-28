@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
-import java.util.Optional;
 
 /**
  * Created by Dyvak on 21.01.2017.
@@ -21,8 +20,8 @@ public class GetAllStopsCommand implements StopCommand {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
-        List<Optional<Stop>> stops = stopService.getAll();
+        List<Stop> stops = stopService.getAll();
         request.setAttribute(STOP_LIST_ATTRIBUTE, stops);
-        return "/WEB-INF/admin/stops.jspx";
+        return "/WEB-INF/admin/stops.jsp";
     }
 }

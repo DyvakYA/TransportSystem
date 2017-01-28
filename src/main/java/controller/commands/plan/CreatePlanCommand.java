@@ -28,7 +28,7 @@ public class CreatePlanCommand implements PlanCommand {
         planService.create(plan);
         request.setAttribute(Command.RESULT_ATTRIBUTE, Localization.getInstanse()
                 .getLocalizedMessage(request, CREATE_PLAN_SUCCESSFUL_MSG));
-        return "/WEB-INF/admin/plans.jspx";
+        return "/WEB-INF/admin/plans.jsp";
 
     }
 

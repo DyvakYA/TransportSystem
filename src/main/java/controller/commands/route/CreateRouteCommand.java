@@ -27,6 +27,6 @@ public class CreateRouteCommand implements RouteCommand {
         request.setAttribute(RESULT_ATTRIBUTE, Localization.getInstanse()
                 .getLocalizedMessage(request, CREATE_ROUTE_SUCCESSFUL_MSG));
         request.setAttribute(ROUTE_LIST_ATTRIBUTE, routeService.getAll());
-        return "/WEB-INF/admin/routes.jspx";
+        return "/WEB-INF/admin/routes.jsp";
     }
 }

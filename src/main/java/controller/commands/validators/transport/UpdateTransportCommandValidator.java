@@ -16,9 +16,9 @@ public class UpdateTransportCommandValidator implements CommandValidator {
 
                 String message = Localization.getInstanse().getLocalizedMessage(request, TRANSPORT_ERROR_MSG);
         
-        return CommandValidatorHelper.getInstance().isNullValidate(new String[]{ID_ATTRIBUTE},
-                RESULT_ATTRIBUTE, ADMIN_DESTINATION_PAGE, message, request, response) &&
+        return CommandValidatorHelper.getInstance().isNullValidate(new String[]{TRANSPORT_ID_ATTRIBUTE},
+                RESULT_ATTRIBUTE, USER_DESTINATION_PAGE, message, request, response) &&
                CommandValidatorHelper.getInstance().isEmptyValidate(new String[]{NUMBER_ATTRIBUTE,MODEL_ATTRIBUTE},
-                RESULT_ATTRIBUTE, ADMIN_DESTINATION_PAGE, message, request, response) ;
+                RESULT_ATTRIBUTE, TRANSPORT_DESTINATION_PAGE, message, request, response) ;
     }
 }

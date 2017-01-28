@@ -6,9 +6,7 @@ import model.dao.TransportDao;
 import model.entities.Transport;
 import model.services.TransportServiceable;
 
-import java.sql.SQLException;
 import java.util.List;
-import java.util.Optional;
 
 /**
  * Created by Dyvak on 21.01.2017.
@@ -25,7 +23,7 @@ public class TransportService implements TransportServiceable{
         return Holder.INSTANCE;
     }
 
-    public List<Optional<Transport>> getAll() throws SQLException {
+    public List<Transport> getAll() {
         try (DaoConnection connection = daoFactory.getConnection()) {
             connection.begin();
             TransportDao transportDao = daoFactory.createTransportDao(connection);
@@ -33,7 +31,7 @@ public class TransportService implements TransportServiceable{
         }
     }
 
-    public void create(Transport transport) throws SQLException {
+    public void create(Transport transport) {
         try (DaoConnection connection = daoFactory.getConnection()) {
             connection.begin();
             TransportDao transportDao = daoFactory.createTransportDao(connection);
@@ -42,7 +40,7 @@ public class TransportService implements TransportServiceable{
         }
     }
 
-    public void update(Transport transport,int id) throws SQLException {
+    public void update(Transport transport,int id)  {
         try (DaoConnection connection = daoFactory.getConnection()) {
             connection.begin();
             TransportDao transportDao = daoFactory.createTransportDao(connection);
@@ -51,7 +49,7 @@ public class TransportService implements TransportServiceable{
         }
     }
 
-    public void delete(int id) throws SQLException {
+    public void delete(int id) {
         try (DaoConnection connection = daoFactory.getConnection()) {
             connection.begin();
             TransportDao transportDao = daoFactory.createTransportDao(connection);
@@ -59,5 +57,4 @@ public class TransportService implements TransportServiceable{
             connection.commit();
         }
     }
-
 }

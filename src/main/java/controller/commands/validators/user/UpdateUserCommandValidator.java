@@ -17,9 +17,9 @@ public class UpdateUserCommandValidator implements CommandValidator {
         String message = Localization.getInstanse().getLocalizedMessage(request, STOP_ERROR_MSG);
         
         return CommandValidatorHelper.getInstance().isNullValidate(new String[]{ID_ATTRIBUTE},
-                RESULT_ATTRIBUTE, ADMIN_DESTINATION_PAGE, message, request, response)
-                && CommandValidatorHelper.getInstance().isEmptyValidate(new String[]{NAME_ATTRIBUTE, ADDRESS_ATTRIBUTE},
-                RESULT_ATTRIBUTE, ADMIN_DESTINATION_PAGE, message, request, response);
+                RESULT_ATTRIBUTE, USER_DESTINATION_PAGE, message, request, response)
+                && CommandValidatorHelper.getInstance().isEmptyValidate(new String[]{NAME_ATTRIBUTE, EMAIL_ATTRIBUTE, PASSWORD_ATTRIBUTE},
+                RESULT_ATTRIBUTE, USER_DESTINATION_PAGE, message, request, response);
     }
 
 }

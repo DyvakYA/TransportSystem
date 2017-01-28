@@ -14,10 +14,10 @@ public class DeleteDriverCommandValidator implements CommandValidator {
     @Override
     public boolean validate(HttpServletRequest request, HttpServletResponse response) {
 
-        String message = Localization.getInstanse().getLocalizedMessage(request, USER_ERROR_MSG);
+        String message = Localization.getInstanse().getLocalizedMessage(request, DRIVER_ERROR_MSG);
          
-        return CommandValidatorHelper.getInstance().isNullValidate(new String[]{ID_ATTRIBUTE},
-                RESULT_ATTRIBUTE, ADMIN_DESTINATION_PAGE, message, request, response);
+        return CommandValidatorHelper.getInstance().isNullValidate(new String[]{DRIVER_ID_ATTRIBUTE},
+                RESULT_ATTRIBUTE, DRIVER_DESTINATION_PAGE, message, request, response);
     }
 
 }

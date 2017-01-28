@@ -8,7 +8,6 @@ import model.services.DriverServiceable;
 
 import java.sql.SQLException;
 import java.util.List;
-import java.util.Optional;
 
 /**
  * Created by Dyvak on 21.01.2017.
@@ -25,23 +24,23 @@ public class DriverService implements DriverServiceable {
         return Holder.INSTANCE;
     }
 
-    public List<Optional<Driver>> getAll() throws SQLException {
+    public List<Driver> getAll()  {
         try (DaoConnection connection = daoFactory.getConnection()) {
             DriverDao driverDao = daoFactory.createDriverDao(connection);
             return driverDao.findAll();
         }
     }
 
-    public void create(Driver driver) throws SQLException {
+    public void create(Driver driver)  {
         try (DaoConnection connection = daoFactory.getConnection()) {
             connection.begin();
-            DriverDao transportDao = daoFactory.createDriverDao(connection);
-            transportDao.create(driver);
+            DriverDao driverDao = daoFactory.createDriverDao(connection);
+            driverDao.create(driver);
             connection.commit();
         }
     }
 
-    public void update(Driver driver,int id) throws SQLException {
+    public void update(Driver driver,int id) {
         try (DaoConnection connection = daoFactory.getConnection()) {
             connection.begin();
             DriverDao driverDao = daoFactory.createDriverDao(connection);
@@ -50,7 +49,7 @@ public class DriverService implements DriverServiceable {
         }
     }
 
-    public void delete(int id) throws SQLException {
+    public void delete(int id) {
         try (DaoConnection connection = daoFactory.getConnection()) {
             connection.begin();
             DriverDao driverDao = daoFactory.createDriverDao(connection);

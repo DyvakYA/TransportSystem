@@ -29,7 +29,7 @@ public class UpdateRouteCommand implements RouteCommand {
         request.setAttribute(Command.RESULT_ATTRIBUTE, Localization.getInstanse()
             .getLocalizedMessage(request, UPDATE_ROUTE_SUCCESSFUL_MSG));
         request.setAttribute(ROUTE_LIST_ATTRIBUTE, routeService.getAll());
-        return "/WEB-INF/admin/routes.jspx";
+        return "/WEB-INF/admin/routes.jsp";
     }
 
 }

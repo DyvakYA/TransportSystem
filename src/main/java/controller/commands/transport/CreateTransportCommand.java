@@ -23,14 +23,15 @@ public class CreateTransportCommand implements TransportCommand {
         if (!new CreateTransportCommandValidator().validate(request, response)) {
             return null;
         }
-        Transport transport = new Transport(
-                TransportType.valueOf(request.getParameter(TYPE_ATTRIBUTE).toUpperCase()),
-                request.getParameter(MODEL_ATTRIBUTE),
-                request.getParameter(NUMBER_ATTRIBUTE));
+        Transport transport = new Transport.Builder()
+                .setType(TransportType.valueOf(request.getParameter("type")))
+                .setModel(request.getParameter("model"))
+                .setNumber(request.getParameter("number"))
+                .build();
         transportService.create(transport);
         request.setAttribute(RESULT_ATTRIBUTE, Localization.getInstanse()
                 .getLocalizedMessage(request, CREATE_TRANSPORT_SUCCESSFUL_MSG));
         request.setAttribute(TRANSPORT_LIST_ATTRIBUTE, transportService.getAll());
-        return "/WEB-INF/admin/transports.jspx";
+        return "/WEB-INF/admin/transports.jsp";
     }
 }

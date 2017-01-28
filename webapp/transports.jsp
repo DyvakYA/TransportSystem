@@ -51,44 +51,10 @@
             </c:forEach>
         </table>
 
-        <form method="post" action="./TransportServlet">
-            <table>
-                <tr>
-                    <td><fmt:message key="Id" /></td><br>
-                    <td><fmt:message key="Type" /></td><br>
-                    <td><fmt:message key="Number" /></td><br>
-                    <td><fmt:message key="Model" /></td><br>
-                </tr>
-                <tr>
-                    <td><input type="text" name="transport_id" size="7"></td><br>
-                    <td><select name="type">
-                        <option>BUS</option>
-                        <option>TRAM</option>
-                        <option>TROLLEYBUS</option>
-                    </select></td><br>
-                    <td><input type="text" name="number" size="7"></td><br>
-                    <td><input type="text" name="model" size="7"></td><br>
-                </tr>
-                <tr>
-                    <td colspan="3"></td>
-                </tr>
-            </table>
-
-            <select name="command">
-                <option value="createTransport"><fmt:message key="CreateCommand" /></option>
-                <option value="updateTransport"><fmt:message key="UpdateCommand" /></option>
-                <option value="deleteTransport"><fmt:message key="DeleteCommand" /></option>
-                <option value="getAllTransports"><fmt:message key="GetAllCommand" /></option>
-            </select>
-            <button class="my_link_smal" type="submit">
-                <fmt:message key="ExecuteCommand" />
-            </button>
             <br />
             <div style="color: red;">
                 <c:out value="${result}" />
             </div>
-
-        </form>
 
     </div>
     <div id="footer">

@@ -3,7 +3,7 @@ package model.dao.exception;
 /**
  * Created by Dyvak on 26.01.2017.
  */
-public class DAOException extends Throwable {
+public class DAOException extends RuntimeException {
     public DAOException(String message) {
         super(message);
     }

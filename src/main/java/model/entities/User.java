@@ -55,6 +55,11 @@ public class User {
 			return this;
 		}
 
+		public Builder setPasswordInt(int password) {
+			instance.passwordHash = password;
+			return this;
+		}
+
 		public Builder setRole(UserRoles role) {
 			instance.role = role;
 			return this;

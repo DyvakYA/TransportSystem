@@ -10,12 +10,12 @@
     <display-name>TransportSystem</display-name>
 
     <servlet>
-        <servlet-name>TransportServlet</servlet-name>
-        <servlet-class>controller.servlet.TransportServlet</servlet-class>
+        <servlet-name>MainController</servlet-name>
+        <servlet-class>controller.servlet.MainController</servlet-class>
     </servlet>
 
     <servlet-mapping>
-        <servlet-name>TransportServlet</servlet-name>
+        <servlet-name>MainController</servlet-name>
         <url-pattern>/rest/*</url-pattern>
     </servlet-mapping>
 
@@ -30,4 +30,5 @@
     <welcome-file-list>
         <welcome-file>index.jsp</welcome-file>
     </welcome-file-list>
+
 </web-app>

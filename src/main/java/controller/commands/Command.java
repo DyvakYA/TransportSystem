@@ -11,11 +11,12 @@ import java.sql.SQLException;
  */
 public interface Command {
 
+
+    String INDEX_JSP = "./index.jsp";
     String NAME_ATTRIBUTE = "name";
     String SURNAME_ATTRIBUTE = "surname";
     String AGE_ATTRIBUTE = "age";
     String ROUTE_ID_ATTRIBUTE = "route_id";
-
     String ADDRESS_ATTRIBUTE = "address";
     String RESULT_ATTRIBUTE = "result";
 

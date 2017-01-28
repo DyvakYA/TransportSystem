@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
-import java.util.Optional;
 
 public class GetAllDriversCommand implements DriverCommand {
 
@@ -18,9 +17,9 @@ public class GetAllDriversCommand implements DriverCommand {
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException, SQLException {
-		List<Optional<Driver>> drivers = driverService.getAll();
+		List<Driver> drivers = driverService.getAll();
 		request.setAttribute(DRIVER_LIST_ATTRIBUTE, drivers);
-		return "/WEB-INF/admin/drivers.jspx";
+		return "/WEB-INF/admin/drivers.jsp";
 	}
 
 }

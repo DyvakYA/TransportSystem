@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
-import java.util.Optional;
 
 /**
  * Created by Dyvak on 21.01.2017.
@@ -21,8 +20,8 @@ public class GetAllRoutesCommand implements RouteCommand {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
-        List<Optional<Route>> routes = routeService.getAll();
+        List<Route> routes = routeService.getAll();
         request.setAttribute(ROUTE_LIST_ATTRIBUTE, routes);
-        return "/WEB-INF/admin/routes.jspx";
+        return "/WEB-INF/admin/routes.jsp";
     }
 }

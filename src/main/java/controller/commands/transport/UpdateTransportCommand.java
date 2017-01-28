@@ -24,14 +24,16 @@ public class UpdateTransportCommand implements TransportCommand {
         if (!new UpdateTransportCommandValidator().validate(request, response)) {
             return null;
         }
-        Transport transport = new Transport(Integer.valueOf(request.getParameter(ID_ATTRIBUTE)),
-                TransportType.valueOf(request.getParameter(TYPE_ATTRIBUTE).toUpperCase()),
-                request.getParameter(MODEL_ATTRIBUTE),
-                String.valueOf(request.getParameter(NUMBER_ATTRIBUTE)));
+        Transport transport = new Transport.Builder()
+                .setId(Integer.parseInt(request.getParameter("transport_id")))
+                .setType(TransportType.valueOf(request.getParameter("type")))
+                .setModel(request.getParameter("model"))
+                .setNumber(request.getParameter("number"))
+                .build();
         transportService.update(transport, transport.getId());
         request.setAttribute(Command.RESULT_ATTRIBUTE, Localization.getInstanse()
                 .getLocalizedMessage(request, UPDATE_TRANSPORT_SUCCESSFUL_MSG));
         request.setAttribute(TRANSPORT_LIST_ATTRIBUTE, transportService.getAll());
-        return "/WEB-INF/admin/transports.jspx";
+        return "/WEB-INF/admin/transports.jsp";
     }
 }

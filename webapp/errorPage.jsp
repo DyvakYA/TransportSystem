@@ -10,7 +10,7 @@
     </head>
     <body>
         <fmt:setLocale value="${sessionScope.userLocale}" scope="session" />
-        <fmt:bundle basename="model.properties.labels">
+        <fmt:bundle basename="labels">
             <fmt:message key="PrivilegeError" />
         </fmt:bundle>
     </body>

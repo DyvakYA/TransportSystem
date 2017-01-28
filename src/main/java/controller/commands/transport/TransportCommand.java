@@ -10,11 +10,11 @@ public interface TransportCommand extends Command {
 
     String ID_ATTRIBUTE = "transport_id";
 
-    String MODEL_ATTRIBUTE = "transport_model";
+    String MODEL_ATTRIBUTE = "model";
 
-    String NUMBER_ATTRIBUTE = "transport_number";
+    String NUMBER_ATTRIBUTE = "number";
 
-    String TYPE_ATTRIBUTE = "transport_type";
+    String TYPE_ATTRIBUTE = "type";
 
     String TRANSPORT_RESULT_ATTRIBUTE ="past_transport";
 
