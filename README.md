@@ -19,10 +19,15 @@
 
 Used technologies:
 
-Java SE 8
+Java SE 8.
 Java EE 7: Servlets, JSP, JSTL
-MySQL, JDBC
-Tomcat
-Git, Maven, SLF4J + Log4j2
-JUnit, Mockito
-Bootstrap, jQuery
+MySQL.
+JDBC.
+Tomcat.
+Git. 
+Maven.
+SLF4J + Log4j2
+JUnit.
+Mockito.
+Bootstrap.
+jQuery.
